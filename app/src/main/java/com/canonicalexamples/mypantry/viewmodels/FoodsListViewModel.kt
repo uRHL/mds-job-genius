@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import retrofit2.await
 
 
-class TeasListViewModel(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModel() {
+class FoodsListViewModel(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModel() {
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
     private var teasList = listOf<Food>()
@@ -46,9 +46,9 @@ class TeasListViewModel(private val database: FoodDatabase, private val webservi
 
 class TeasListViewModelFactory(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TeasListViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(FoodsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return TeasListViewModel(database, webservice) as T
+            return FoodsListViewModel(database, webservice) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

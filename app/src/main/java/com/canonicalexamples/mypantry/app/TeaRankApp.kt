@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class TeaRankApp: Application() {
+class MyPantryApp: Application() {
     val database by lazy { FoodDatabase.getInstance(this) }
     val webservice by lazy {
         Retrofit.Builder()
@@ -26,9 +26,9 @@ class TeaRankApp: Application() {
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
             database.clearAllTables()
             database.foodDao.apply {
-                this.create(food = Food(id = 0, name = "Oolong", rating = 1))
-                this.create(food = Food(id = 1, name = "Pu erh", rating = 1))
-                this.create(food = Food(id = 2, name = "Green tea", rating = 1))
+                this.create(food = Food(id = 0, name = "CocaCola", rating = 1))
+                this.create(food = Food(id = 1, name = "Rice", rating = 1))
+                this.create(food = Food(id = 2, name = "Bread", rating = 1))
             }
         }
     }

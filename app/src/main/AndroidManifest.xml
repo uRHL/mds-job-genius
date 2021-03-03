@@ -5,17 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.canonicalexamples.mypantry.app.TeaRankApp"
+        android:name="com.canonicalexamples.mypantry.app.MyPantryApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TeaRank">
+        android:theme="@style/Theme.MyPantry">
         <activity
             android:name="com.canonicalexamples.mypantry.view.MyPantryActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.TeaRank.NoActionBar">
+            android:theme="@style/Theme.MyPantry.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

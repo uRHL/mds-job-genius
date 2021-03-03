@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.mypantry.R
-import com.canonicalexamples.mypantry.app.TeaRankApp
-import com.canonicalexamples.mypantry.databinding.FragmentTeasListBinding
+import com.canonicalexamples.mypantry.app.MyPantryApp
+import com.canonicalexamples.mypantry.databinding.FragmentFoodListBinding
 import com.canonicalexamples.mypantry.util.observeEvent
-import com.canonicalexamples.mypantry.viewmodels.TeasListViewModel
+import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModel
 import com.canonicalexamples.mypantry.viewmodels.TeasListViewModelFactory
 
 class FoodListFragment : Fragment() {
 
-    private lateinit var binding: FragmentTeasListBinding
-    private val viewModel: TeasListViewModel by viewModels {
-        val app = activity?.application as TeaRankApp
+    private lateinit var binding: FragmentFoodListBinding
+    private val viewModel: FoodsListViewModel by viewModels {
+        val app = activity?.application as MyPantryApp
         TeasListViewModelFactory(app.database, app.webservice)
     }
 
@@ -27,7 +27,7 @@ class FoodListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentTeasListBinding.inflate(inflater, container, false)
+        binding = FragmentFoodListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
