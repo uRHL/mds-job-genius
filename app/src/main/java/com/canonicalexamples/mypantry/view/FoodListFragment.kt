@@ -12,14 +12,14 @@ import com.canonicalexamples.mypantry.app.MyPantryApp
 import com.canonicalexamples.mypantry.databinding.FragmentFoodListBinding
 import com.canonicalexamples.mypantry.util.observeEvent
 import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModel
-import com.canonicalexamples.mypantry.viewmodels.TeasListViewModelFactory
+import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModelFactory
 
 class FoodListFragment : Fragment() {
 
     private lateinit var binding: FragmentFoodListBinding
     private val viewModel: FoodsListViewModel by viewModels {
         val app = activity?.application as MyPantryApp
-        TeasListViewModelFactory(app.database, app.webservice)
+        FoodsListViewModelFactory(app.database, app.webservice)
     }
 
     override fun onCreateView(

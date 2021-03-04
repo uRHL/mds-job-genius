@@ -11,7 +11,7 @@ import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModel
 class FoodListAdapter(private val viewModel: FoodsListViewModel): RecyclerView.Adapter<FoodListAdapter.FoodItemViewHolder>() {
 
     class FoodItemViewHolder(private val viewModel: FoodsListViewModel, binding: ItemFoodBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        val teaName = binding.teaName
+        val foodName = binding.foodName
         init {
             binding.root.setOnClickListener(this)
         }
@@ -24,8 +24,8 @@ class FoodListAdapter(private val viewModel: FoodsListViewModel): RecyclerView.A
         FoodItemViewHolder(viewModel, ItemFoodBinding.inflate(LayoutInflater.from(parent.context)))
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
-        val tea = viewModel.getItem(position)
-        holder.teaName.text = "${tea.name}"
+        val food = viewModel.getItem(position)
+        holder.foodName.text = "${food.name}"
     }
 
     override fun getItemCount(): Int = viewModel.numberOfItems

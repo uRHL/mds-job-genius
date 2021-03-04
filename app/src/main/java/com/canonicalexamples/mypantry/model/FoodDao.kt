@@ -9,12 +9,12 @@ import androidx.room.Update
 interface FoodDao {
     @Insert
     suspend fun create(food: Food)
-    @Query("SELECT * FROM tea_table WHERE id = :id")
+    @Query("SELECT * FROM food_table WHERE id = :id")
     suspend fun get(id: Int): Food?
-    @Query("SELECT * FROM tea_table")
-    suspend fun fetchTeas(): List<Food>
+    @Query("SELECT * FROM food_table")
+    suspend fun fetchFoods(): List<Food>
     @Update
     suspend fun update(food: Food)
-    @Query("DELETE FROM tea_table WHERE id = :id")
+    @Query("DELETE FROM food_table WHERE id = :id")
     suspend fun delete(id: Int)
 }

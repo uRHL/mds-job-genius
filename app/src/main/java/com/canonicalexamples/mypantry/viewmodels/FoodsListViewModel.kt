@@ -17,23 +17,23 @@ import retrofit2.await
 class FoodsListViewModel(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModel() {
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
-    private var teasList = listOf<Food>()
+    private var foodsList = listOf<Food>()
     data class Item(val name: String)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            teasList = database.foodDao.fetchTeas()
+            foodsList = database.foodDao.fetchFoods()
         }
     }
 
     val numberOfItems: Int
-        get() = teasList.count()
+        get() = foodsList.count()
 
     fun addButtonClicked() {
         _navigate.value = Event(true)
     }
 
-    fun getItem(n: Int) = Item(name = teasList[n].name)
+    fun getItem(n: Int) = Item(name = foodsList[n].name)
 
     fun onClickItem(n: Int) {
         println("Item $n clicked")
@@ -44,7 +44,7 @@ class FoodsListViewModel(private val database: FoodDatabase, private val webserv
     }
 }
 
-class TeasListViewModelFactory(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModelProvider.Factory {
+class FoodsListViewModelFactory(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FoodsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
