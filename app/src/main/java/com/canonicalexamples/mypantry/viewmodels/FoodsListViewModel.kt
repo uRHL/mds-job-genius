@@ -18,7 +18,7 @@ class FoodsListViewModel(private val database: FoodDatabase, private val webserv
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
     private var foodsList = listOf<Food>()
-    data class Item(val name: String)
+    data class Item(val name: String, val quantity: Int)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -33,14 +33,14 @@ class FoodsListViewModel(private val database: FoodDatabase, private val webserv
         _navigate.value = Event(true)
     }
 
-    fun getItem(n: Int) = Item(name = foodsList[n].name)
+    fun getItem(n: Int) = Item(name = foodsList[n].name, quantity = foodsList[n].quantity)
 
     fun onClickItem(n: Int) {
         println("Item $n clicked")
-        viewModelScope.launch(Dispatchers.IO) {
-            val todo = webservice.getTodo(n).await()
-            println("todo: ${todo.title}")
-        }
+        //viewModelScope.launch(Dispatchers.IO) {
+        //    val todo = webservice.getTodo(n).await()
+        //    println("todo: ${todo.title}")
+        // }
     }
 }
 

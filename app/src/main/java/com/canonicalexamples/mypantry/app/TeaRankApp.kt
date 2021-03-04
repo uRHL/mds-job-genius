@@ -26,9 +26,9 @@ class MyPantryApp: Application() {
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
             database.clearAllTables()
             database.foodDao.apply {
-                this.create(food = Food(id = 0, name = "CocaCola", rating = 1))
-                this.create(food = Food(id = 1, name = "Rice", rating = 1))
-                this.create(food = Food(id = 2, name = "Bread", rating = 1))
+                this.create(food = Food(name = "CocaCola", quantity = 1))
+                this.create(food = Food(name = "Rice", quantity = 1))
+                this.create(food = Food(name = "Bread", quantity = 1))
             }
         }
     }
