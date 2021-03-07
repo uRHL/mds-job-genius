@@ -1,4 +1,4 @@
-package com.canonicalexamples.mypantry.model
+package com.canonicalexamples.jobgenius.model
 
 import android.content.Context
 import androidx.room.Database

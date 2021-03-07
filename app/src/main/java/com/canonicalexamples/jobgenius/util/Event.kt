@@ -1,4 +1,4 @@
-package com.canonicalexamples.mypantry.util
+package com.canonicalexamples.jobgenius.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData

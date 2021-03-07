@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.canonicalexamples.mypantry.view.JobListFragment"
+        android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_job_list">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.canonicalexamples.mypantry.view.SearchFragment"
+        android:name="com.canonicalexamples.jobgenius.view.SearchFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_search">
 

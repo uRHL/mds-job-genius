@@ -1,4 +1,4 @@
-package com.canonicalexamples.mypantry.view
+package com.canonicalexamples.jobgenius.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.canonicalexamples.mypantry.R
-import com.canonicalexamples.mypantry.app.JobGeniusApp
-import com.canonicalexamples.mypantry.databinding.FragmentJobListBinding
-import com.canonicalexamples.mypantry.util.observeEvent
-import com.canonicalexamples.mypantry.viewmodels.JobListViewModel
-import com.canonicalexamples.mypantry.viewmodels.JobListViewModelFactory
+import com.canonicalexamples.jobgenius.R
+import com.canonicalexamples.jobgenius.app.JobGeniusApp
+import com.canonicalexamples.jobgenius.databinding.FragmentJobListBinding
+import com.canonicalexamples.jobgenius.util.observeEvent
+import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
+import com.canonicalexamples.jobgenius.viewmodels.JobListViewModelFactory
 
 class JobListFragment : Fragment() {
 

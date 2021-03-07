@@ -1,4 +1,4 @@
-package com.canonicalexamples.mypantry.model
+package com.canonicalexamples.jobgenius.model
 
 data class JobFacts(
     val id: Int = 0,

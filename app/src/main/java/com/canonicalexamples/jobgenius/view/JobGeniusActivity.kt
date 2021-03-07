@@ -1,10 +1,10 @@
-package com.canonicalexamples.mypantry.view
+package com.canonicalexamples.jobgenius.view
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.canonicalexamples.mypantry.R
+import com.canonicalexamples.jobgenius.R
 
 class JobGeniusActivity : AppCompatActivity() {
 

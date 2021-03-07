@@ -1,4 +1,4 @@
-package com.canonicalexamples.mypantry
+package com.canonicalexamples.jobgenius
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

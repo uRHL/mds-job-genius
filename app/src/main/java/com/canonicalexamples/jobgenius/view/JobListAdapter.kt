@@ -1,11 +1,11 @@
-package com.canonicalexamples.mypantry.view
+package com.canonicalexamples.jobgenius.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.canonicalexamples.mypantry.databinding.ItemJobBinding
-import com.canonicalexamples.mypantry.viewmodels.JobListViewModel
+import com.canonicalexamples.jobgenius.databinding.ItemJobBinding
+import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 
 
 class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adapter<JobListAdapter.JobItemViewHolder>() {

@@ -1,9 +1,9 @@
-package com.canonicalexamples.mypantry.app
+package com.canonicalexamples.jobgenius.app
 
 import android.app.Application
-import com.canonicalexamples.mypantry.model.Job
-import com.canonicalexamples.mypantry.model.JobDatabase
-import com.canonicalexamples.mypantry.model.JobFactsService
+import com.canonicalexamples.jobgenius.model.Job
+import com.canonicalexamples.jobgenius.model.JobDatabase
+import com.canonicalexamples.jobgenius.model.JobFactsService
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

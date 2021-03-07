@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.canonicalexamples.mypantry">
+    package="com.canonicalexamples.jobgenius">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.canonicalexamples.mypantry.app.JobGeniusApp"
+        android:name="com.canonicalexamples.jobgenius.app.JobGeniusApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPantry">
         <activity
-            android:name="com.canonicalexamples.mypantry.view.JobGeniusActivity"
+            android:name="com.canonicalexamples.jobgenius.view.JobGeniusActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.MyPantry.NoActionBar">
             <intent-filter>

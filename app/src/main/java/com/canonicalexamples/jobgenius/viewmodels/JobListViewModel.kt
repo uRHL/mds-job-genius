@@ -1,14 +1,14 @@
-package com.canonicalexamples.mypantry.viewmodels
+package com.canonicalexamples.jobgenius.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.canonicalexamples.mypantry.model.Job
-import com.canonicalexamples.mypantry.model.JobDatabase
-import com.canonicalexamples.mypantry.model.JobFactsService
-import com.canonicalexamples.mypantry.util.Event
+import com.canonicalexamples.jobgenius.model.Job
+import com.canonicalexamples.jobgenius.model.JobDatabase
+import com.canonicalexamples.jobgenius.model.JobFactsService
+import com.canonicalexamples.jobgenius.util.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
