@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/SecondFragment">
-
+    app:startDestination="@id/SearchFragment">
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_job_list">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/SearchFragment"
         android:name="com.canonicalexamples.jobgenius.view.SearchFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/search_fragment_label"
         tools:layout="@layout/fragment_search">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SearchFragment_to_JobListFragment"
+            app:destination="@id/JobListFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/JobListFragment"
+        android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
+        android:label="@string/job_list_fragment_label"
+        tools:layout="@layout/fragment_job_list">
+
+        <action
+            android:id="@+id/action_JobListFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
+    </fragment>
+
 </navigation>

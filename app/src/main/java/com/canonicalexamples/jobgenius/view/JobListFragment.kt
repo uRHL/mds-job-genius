@@ -41,7 +41,7 @@ class JobListFragment : Fragment() {
 
         viewModel.navigate.observeEvent(viewLifecycleOwner) { navigate ->
             if (navigate) {
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+                findNavController().navigate(R.id.action_JobListFragment_to_SearchFragment)
             }
         }
     }
