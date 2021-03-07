@@ -6,11 +6,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.canonicalexamples.mypantry.R
 
-class MyPantryActivity : AppCompatActivity() {
+class JobGeniusActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_my_pantry)
+        setContentView(R.layout.activity_job_genius)
         setSupportActionBar(findViewById(R.id.toolbar))
     }
 

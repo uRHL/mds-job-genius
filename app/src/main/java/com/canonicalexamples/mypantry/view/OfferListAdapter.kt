@@ -4,13 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.canonicalexamples.mypantry.databinding.ItemFoodBinding
+import com.canonicalexamples.mypantry.databinding.ItemOfferBinding
 import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModel
 
 
-class FoodListAdapter(private val viewModel: FoodsListViewModel): RecyclerView.Adapter<FoodListAdapter.FoodItemViewHolder>() {
+class OfferListAdapter(private val viewModel: FoodsListViewModel): RecyclerView.Adapter<OfferListAdapter.FoodItemViewHolder>() {
 
-    class FoodItemViewHolder(private val viewModel: FoodsListViewModel, binding: ItemFoodBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    class FoodItemViewHolder(private val viewModel: FoodsListViewModel, binding: ItemOfferBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
         val foodText = binding.foodText
         init {
             binding.root.setOnClickListener(this)
@@ -21,7 +21,7 @@ class FoodListAdapter(private val viewModel: FoodsListViewModel): RecyclerView.A
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodItemViewHolder =
-        FoodItemViewHolder(viewModel, ItemFoodBinding.inflate(LayoutInflater.from(parent.context)))
+        FoodItemViewHolder(viewModel, ItemOfferBinding.inflate(LayoutInflater.from(parent.context)))
 
     override fun onBindViewHolder(holder: FoodItemViewHolder, position: Int) {
         val food = viewModel.getItem(position)
