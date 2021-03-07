@@ -6,18 +6,18 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Offer::class], version = 1, exportSchema = false)
-abstract class OfferDatabase: RoomDatabase() {
-    abstract val offerDao: OfferDao
+@Database(entities = [Job::class], version = 1, exportSchema = false)
+abstract class JobDatabase: RoomDatabase() {
+    abstract val jobDao: JobDao
 
     companion object {
         @Volatile
-        private var INSTANCE: OfferDatabase? = null
-        fun getInstance(context: Context): OfferDatabase {
+        private var INSTANCE: JobDatabase? = null
+        fun getInstance(context: Context): JobDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    OfferDatabase::class.java,
+                    JobDatabase::class.java,
                     "my_pantry_database"
                 )
                     .fallbackToDestructiveMigration()

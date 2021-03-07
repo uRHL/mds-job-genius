@@ -4,8 +4,8 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 
-@Entity(tableName = "offer_table")
-data class Offer(
+@Entity(tableName = "job_table")
+data class Job(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String = "",

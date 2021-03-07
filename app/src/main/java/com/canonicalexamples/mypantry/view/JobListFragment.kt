@@ -8,18 +8,18 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.mypantry.R
-import com.canonicalexamples.mypantry.app.MyPantryApp
+import com.canonicalexamples.mypantry.app.JobGeniusApp
 import com.canonicalexamples.mypantry.databinding.FragmentJobListBinding
 import com.canonicalexamples.mypantry.util.observeEvent
-import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModel
-import com.canonicalexamples.mypantry.viewmodels.FoodsListViewModelFactory
+import com.canonicalexamples.mypantry.viewmodels.JobListViewModel
+import com.canonicalexamples.mypantry.viewmodels.JobListViewModelFactory
 
 class JobListFragment : Fragment() {
 
     private lateinit var binding: FragmentJobListBinding
-    private val viewModel: FoodsListViewModel by viewModels {
-        val app = activity?.application as MyPantryApp
-        FoodsListViewModelFactory(app.database, app.webservice)
+    private val viewModel: JobListViewModel by viewModels {
+        val app = activity?.application as JobGeniusApp
+        JobListViewModelFactory(app.database, app.webservice)
     }
 
     override fun onCreateView(

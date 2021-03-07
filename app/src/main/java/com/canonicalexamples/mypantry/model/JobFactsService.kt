@@ -5,12 +5,12 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 
-interface FoodFactsService {
+interface JobFactsService {
     @GET("/positions.json")
-    fun getOffers(): Call<FoodFacts>
+    fun getJobs(): Call<JobFacts>
 
     @GET("/positions.json?location=Remote")
-    fun getRemoteOffers(): Call<FoodFacts>
+    fun getRemoteJobs(): Call<JobFacts>
 
 
 }
