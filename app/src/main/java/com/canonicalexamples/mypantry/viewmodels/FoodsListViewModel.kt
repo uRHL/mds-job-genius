@@ -5,24 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.canonicalexamples.mypantry.model.Food
-import com.canonicalexamples.mypantry.model.FoodDatabase
+import com.canonicalexamples.mypantry.model.Offer
+import com.canonicalexamples.mypantry.model.OfferDatabase
 import com.canonicalexamples.mypantry.model.FoodFactsService
 import com.canonicalexamples.mypantry.util.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.await
 
 
-class FoodsListViewModel(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModel() {
+class FoodsListViewModel(private val database: OfferDatabase, private val webservice: FoodFactsService): ViewModel() {
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
-    private var foodsList = listOf<Food>()
+    private var foodsList = listOf<Offer>()
     data class Item(val name: String, val quantity: Int)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            foodsList = database.foodDao.fetchFoods()
+            foodsList = database.offerDao.fetchFoods()
         }
     }
 
@@ -44,7 +43,7 @@ class FoodsListViewModel(private val database: FoodDatabase, private val webserv
     }
 }
 
-class FoodsListViewModelFactory(private val database: FoodDatabase, private val webservice: FoodFactsService): ViewModelProvider.Factory {
+class FoodsListViewModelFactory(private val database: OfferDatabase, private val webservice: FoodFactsService): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FoodsListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

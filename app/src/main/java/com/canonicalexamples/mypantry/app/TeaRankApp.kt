@@ -1,8 +1,8 @@
 package com.canonicalexamples.mypantry.app
 
 import android.app.Application
-import com.canonicalexamples.mypantry.model.Food
-import com.canonicalexamples.mypantry.model.FoodDatabase
+import com.canonicalexamples.mypantry.model.Offer
+import com.canonicalexamples.mypantry.model.OfferDatabase
 import com.canonicalexamples.mypantry.model.FoodFactsService
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class MyPantryApp: Application() {
-    val database by lazy { FoodDatabase.getInstance(this) }
+    val database by lazy { OfferDatabase.getInstance(this) }
     val webservice by lazy {
         Retrofit.Builder()
             .baseUrl("https://jsonplaceholder.typicode.com/")
@@ -25,10 +25,10 @@ class MyPantryApp: Application() {
 
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
             database.clearAllTables()
-            database.foodDao.apply {
-                this.create(food = Food(name = "CocaCola", quantity = 1))
-                this.create(food = Food(name = "Rice", quantity = 1))
-                this.create(food = Food(name = "Bread", quantity = 1))
+            database.offerDao.apply {
+                this.create(offer = Offer(name = "CocaCola", quantity = 1))
+                this.create(offer = Offer(name = "Rice", quantity = 1))
+                this.create(offer = Offer(name = "Bread", quantity = 1))
             }
         }
     }
