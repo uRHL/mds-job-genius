@@ -1,10 +1,22 @@
 <resources>
     <string name="app_name">Job Genius</string>
-    <string name="action_settings">Settings</string>
     <!--  Strings used for fragments for navigation  -->
+    <string name="action_settings">Settings</string>
+
+    <!--  Job searching activity  -->
     <string name="search_fragment_label">Search Fragment</string>
-    <string name="job_list_fragment_label">Job List Fragment</string>
-    <string name="search">Find jobs</string>
     <string name="description_filter_text_field_label">Filter by title, benefits, companies, expertise</string>
     <string name="remote_checkbox_label">Only remote jobs</string>
+    <string name="search_button">Find jobs</string>
+    <string name="job_list_fragment_label">Job List Fragment</string>
+    <string name="item_job_title">Title: </string>
+    <string name="item_job_company">Company: </string>
+    <string name="item_job_type">Type: </string>
+    <string name="item_job_more_info">more info</string>
+    <string name="item_job_fav_button_alt">favorite</string>
+
+    <!--  Bottom navigation labels  -->
+    <string name="bottom_nav_search">Discovery</string>
+    <string name="bottom_nav_favorites">Favourites</string>
+    <string name="bottom_nav_applications">Applications</string>
 </resources>

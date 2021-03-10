@@ -9,19 +9,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/description_filter_text_field"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/description_filter_text_field_label"
 
+        android:hint="@string/description_filter_text_field_label"
         app:layout_constraintBottom_toTopOf="@id/checkbox_remote"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        app:layout_constraintTop_toTopOf="parent">
+
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
@@ -29,20 +29,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        app:layout_constraintTop_toBottomOf="@id/button_second"
+        android:text="@string/remote_checkbox_label"
         app:layout_constraintBottom_toTopOf="@id/description_filter_text_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
 
-        android:text="@string/remote_checkbox_label"/>
+        app:layout_constraintTop_toBottomOf="@id/button_second" />
 
     <Button
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/search"
+        android:text="@string/search_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/checkbox_remote" />
+
+    <include
+        layout="@layout/fragment_bottom_nav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="25dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

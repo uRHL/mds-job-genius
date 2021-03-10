@@ -3,16 +3,16 @@
     <item
         android:id="@+id/page_1"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/search"/>
+        android:icon="@drawable/magnifying_glass"
+        android:title="@string/bottom_nav_search"/>
     <item
         android:id="@+id/page_2"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/search"/>
+        android:icon="@drawable/favorites"
+        android:title="@string/bottom_nav_favorites"/>
     <item
         android:id="@+id/page_3"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:title="@string/search"/>
+        android:icon="@drawable/business_man"
+        android:title="@string/bottom_nav_applications"/>
 </menu>

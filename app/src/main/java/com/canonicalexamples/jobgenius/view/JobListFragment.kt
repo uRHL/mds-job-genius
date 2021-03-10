@@ -35,9 +35,9 @@ class JobListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.recyclerView.adapter = JobListAdapter(viewModel = viewModel)
-        binding.fab.setOnClickListener {
-            viewModel.addButtonClicked()
-        }
+//        binding.fab.setOnClickListener {
+//            viewModel.addButtonClicked()
+//        }
 
         viewModel.navigate.observeEvent(viewLifecycleOwner) { navigate ->
             if (navigate) {

@@ -11,7 +11,7 @@ import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adapter<JobListAdapter.JobItemViewHolder>() {
 
     class JobItemViewHolder(private val viewModel: JobListViewModel, binding: ItemJobBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-        val jobText = binding.jobText
+        val jobText = binding.jobTitle
         init {
             binding.root.setOnClickListener(this)
         }
