@@ -25,8 +25,10 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SearchFragment_to_JobListFragment)
+        view.findViewById<Button>(R.id.search_button).setOnClickListener {
+            // I do not want to take decisions here, but in the viewmodel
+
+            //findNavController().navigate(R.id.action_SearchFragment_to_JobListFragment)
         }
     }
 }

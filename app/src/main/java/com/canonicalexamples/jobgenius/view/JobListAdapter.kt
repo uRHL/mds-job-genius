@@ -25,7 +25,7 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
 
     override fun onBindViewHolder(holder: JobItemViewHolder, position: Int) {
         val job = viewModel.getItem(position)
-        holder.jobText.text = "${job.name} quantity: ${job.quantity}"
+        holder.jobText.text = "${job.name} favorite: ${job.fav}"
     }
 
     override fun getItemCount(): Int = viewModel.numberOfItems

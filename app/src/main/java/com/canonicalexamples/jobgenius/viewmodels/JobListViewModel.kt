@@ -17,7 +17,7 @@ class JobListViewModel(private val database: JobDatabase, private val webservice
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
     private var jobList = listOf<Job>()
-    data class Item(val name: String, val quantity: Int)
+    data class Item(val name: String, val fav: Boolean)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,7 +32,7 @@ class JobListViewModel(private val database: JobDatabase, private val webservice
         _navigate.value = Event(true)
     }
 
-    fun getItem(n: Int) = Item(name = jobList[n].name, quantity = jobList[n].quantity)
+    fun getItem(n: Int) = Item(name = jobList[n].title, fav = jobList[n].fav)
 
     fun onClickItem(n: Int) {
         println("Item $n clicked")
