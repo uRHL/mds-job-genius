@@ -1,10 +1,6 @@
 package com.canonicalexamples.jobgenius.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.canonicalexamples.jobgenius.model.Job
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobFactsService
@@ -13,10 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class JobListViewModel(private val database: JobDatabase, private val webservice: JobFactsService): ViewModel() {
+class JobListViewModel(private val database: JobDatabase, private val webservice: JobFactsService) : ViewModel() {
     private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
     val navigate: LiveData<Event<Boolean>> = _navigate
     private var jobList = listOf<Job>()
+
     data class Item(val name: String, val fav: Boolean)
 
     init {
@@ -43,7 +40,7 @@ class JobListViewModel(private val database: JobDatabase, private val webservice
     }
 }
 
-class JobListViewModelFactory(private val database: JobDatabase, private val webservice: JobFactsService): ViewModelProvider.Factory {
+class JobListViewModelFactory(private val database: JobDatabase, private val webservice: JobFactsService) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(JobListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

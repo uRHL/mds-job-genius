@@ -16,7 +16,7 @@
     <string name="item_job_fav_button_alt">favorite</string>
 
     <!--  Bottom navigation labels  -->
-    <string name="bottom_nav_search">Discovery</string>
-    <string name="bottom_nav_favorites">Favourites</string>
-    <string name="bottom_nav_applications">Applications</string>
+    <string name="bottom_nav_search">Discover</string>
+    <string name="bottom_nav_favorites">Favorites</string>
+    <string name="bottom_nav_applications">My applications</string>
 </resources>
