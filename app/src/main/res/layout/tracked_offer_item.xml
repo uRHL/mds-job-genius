@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/jobOfferTileLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tracked_offer_title_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    <TextView
+        android:id="@+id/jobOfferTitle"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/jobOfferTileLabel"
+        app:layout_constraintTop_toTopOf="@id/jobOfferTileLabel"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="3dp"
+        android:text="Example offer" />
+
+    <TextView
+        android:id="@+id/jobOfferUpdateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tracked_offer_last_update_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/jobOfferUpdateDate"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginEnd="3dp"/>
+
+    <TextView
+        android:id="@+id/jobOfferUpdateDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/jobOfferUpdateLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="dd/mm/yyyy"
+        android:layout_marginEnd="@dimen/fab_margin" />
+    <include
+        layout="@layout/fragment_tracked_offer_steps"
+        android:id="@+id/trackingSteps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/jobOfferTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginEnd="@dimen/fab_margin"/>
+
+    <Button
+        android:id="@+id/abortTrackingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tracked_offer_abort_button_label"
+        app:layout_constraintTop_toBottomOf="@id/trackingSteps"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"/>
+
+    <Button
+        android:id="@+id/nextStepButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tracked_offer_next_step_button_label"
+        app:layout_constraintTop_toBottomOf="@id/trackingSteps"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,11 +18,8 @@
         android:id="@+id/JobListFragment"
         android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
         android:label="@string/job_list_fragment_label"
-        tools:layout="@layout/fragment_job_list">
+        tools:layout="@layout/activity_job_listing">
 
-        <action
-            android:id="@+id/action_JobListFragment_to_SearchFragment"
-            app:destination="@id/SearchFragment" />
         <action
             android:id="@+id/action_JobListFragment_to_JobDetailsFragment"
             app:destination="@+id/JobDetailsFragment"/>
@@ -32,6 +29,25 @@
         android:id="@+id/JobDetailsFragment"
         android:name="com.canonicalexamples.jobgenius.view.JobDetailsFragment"
         android:label="@string/job_details_description_label"
-        tools:layout="@layout/job_details"/>
+        tools:layout="@layout/job_details">
 
+        <action
+            android:id="@+id/action_JobDetailsFragment_to_OfferTrackingFragment"
+            app:destination="@+id/OfferTrackingFragment" />
+        <action
+            android:id="@+id/action_JobDetailsFragment_to_JobApplicationWebFragment"
+            app:destination="@+id/JobApplicationWebFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/OfferTrackingFragment"
+        android:name="com.canonicalexamples.jobgenius.view.OfferTrackingFragment"
+        tools:layout="@layout/activity_tracked_offer_listing">
+    </fragment>
+
+    <fragment
+        android:id="@id/JobApplicationWebFragment"
+        android:name="com.canonicalexamples.jobgenius.view.JobApplicationWebFragment"
+        tools:layout="@layout/fragment_job_application_web">
+    </fragment>
 </navigation>

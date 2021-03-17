@@ -7,11 +7,11 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/job_title"
-        android:layout_width="match_parent"
+        android:id="@+id/job_title_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,25 +19,56 @@
         tools:text="@string/job_card_item_title" />
 
     <TextView
-        android:id="@+id/job_company"
-        android:layout_width="match_parent"
+        android:id="@+id/job_title"
+        android:layout_width="365dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@id/job_title_label"
+        app:layout_constraintTop_toTopOf="@id/job_title_label"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/job_company_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@id/job_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/job_title_label"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/job_card_item_company"/>
+
     <TextView
-        android:id="@+id/job_remote"
-        android:layout_width="match_parent"
+        android:id="@+id/job_company"
+        android:layout_width="325dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@id/job_company_label"
+        app:layout_constraintTop_toTopOf="@id/job_company_label"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/job_remote_label"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@id/job_company"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintTop_toBottomOf="@id/job_company_label"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/job_card_item_remote"/>
+
+    <TextView
+        android:id="@+id/job_remote"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toEndOf="@id/job_remote_label"
+        app:layout_constraintTop_toTopOf="@id/job_remote_label"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="3dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,20 @@
     <string name="job_card_item_start_tracking">Track this offer</string>
     <string name="job_details_description_label">Description</string>
 
+
+    <!--  Offer tracking -->
+    <!-- Steps -->
+    <string name="tracking_step_1">1. Gather information about the job and the company</string>
+    <string name="tracking_step_2">2. Apply to the job in the official web site</string>
+    <string name="tracking_step_3">3. Prepare the interview(s)</string>
+    <string name="tracking_step_4">4. Go to the interview(s)</string>
+    <string name="tracking_step_5">5. Request feedback from the company</string>
+    <!-- labels -->
+    <string name="tracked_offer_title_label">Title: </string>
+    <string name="tracked_offer_last_update_label">Last update:</string>
+    <string name="tracked_offer_abort_button_label">ABORT</string>
+    <string name="tracked_offer_next_step_button_label">next step</string>
+
     <!--  Bottom navigation labels  -->
     <string name="bottom_nav_search">Discover</string>
     <string name="bottom_nav_favorites">Favorites</string>
