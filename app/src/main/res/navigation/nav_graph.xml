@@ -23,6 +23,15 @@
         <action
             android:id="@+id/action_JobListFragment_to_SearchFragment"
             app:destination="@id/SearchFragment" />
+        <action
+            android:id="@+id/action_JobListFragment_to_JobDetailsFragment"
+            app:destination="@+id/JobDetailsFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/JobDetailsFragment"
+        android:name="com.canonicalexamples.jobgenius.view.JobDetailsFragment"
+        android:label="@string/job_details_description_label"
+        tools:layout="@layout/job_details"/>
 
 </navigation>

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Job::class], version = 2, exportSchema = false)
+@Database(entities = [Job::class], version = 3, exportSchema = false)
 abstract class JobDatabase: RoomDatabase() {
     abstract val jobDao: JobDao
 

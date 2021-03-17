@@ -11,6 +11,7 @@ data class Job(
         val githubId: String = "",
         val title: String = "",
         val fav: Boolean = false,
+        val remote: Boolean = false,
         val company: String = "",
         val location: String = "",
         val description: String = "",
