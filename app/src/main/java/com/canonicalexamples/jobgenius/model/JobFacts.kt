@@ -1,15 +1,15 @@
 package com.canonicalexamples.jobgenius.model
 
 data class JobFacts(
-    val id: String = "",
-    val type: String = "",
-    val url: String = "",
-    val created_at: String = "",
-    val company: String = "",
-    val company_url: String = "",
-    val location: String = "",
-    val title: String = "",
-    val description: String = "",
-    val how_to_apply: String = "",
-    val company_logo: String = ""
+    var id: String = "",
+    var type: String = "",
+    var url: String = "",
+    var created_at: String = "",
+    var company: String = "",
+    var company_url: String = "",
+    var location: String = "",
+    var title: String = "",
+    var description: String = "",
+    var how_to_apply: String = "",
+    var company_logo: String = ""
 )
