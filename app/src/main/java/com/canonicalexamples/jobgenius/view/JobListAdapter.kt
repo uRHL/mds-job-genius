@@ -31,7 +31,7 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
         val job = viewModel.getJobCard(position)
         holder.jobTitle.text = job.title
         holder.jobCompany.text = job.company
-        if (job.remote) {
+        if (job.remote == "Remote") {
             holder.jobType.text = "Remote"
         }else {
             holder.jobType.text = "Not remote"

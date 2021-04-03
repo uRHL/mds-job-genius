@@ -1,6 +1,7 @@
 package com.canonicalexamples.jobgenius.view
 
 import android.os.Bundle
+import android.os.StrictMode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,12 @@ import android.widget.CheckBox
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.jobgenius.R
-import com.canonicalexamples.jobgenius.model.JobFacts
-import com.canonicalexamples.jobgenius.model.JobFactsService
+import com.canonicalexamples.jobgenius.model.Job
+import com.canonicalexamples.jobgenius.model.JobService
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.GsonBuilder
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.await
 import retrofit2.converter.gson.GsonConverterFactory
 
 
@@ -49,16 +49,20 @@ class SearchFragment : Fragment() {
                     .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                     .build()
 
-            val service: JobFactsService = retrofit.create(JobFactsService::class.java)
+            val service: JobService = retrofit.create(JobService::class.java)
             var location: String = ""
             if (isRemote){
                 location = "Remote"
             }
 
             //we make the call
-            val jobs: Call<List<JobFacts>> = service.getJobs(1, searchFilters.toString(), location)
-
-            //println(jobs.await().size)
+            val jobsCall: Call<List<Job>> = service.getJobs(1, searchFilters.toString(), location)
+            val policy = StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build()
+            StrictMode.setThreadPolicy(policy)
+            val jobs: List<Job>? = jobsCall.execute().body()
+            //database.
+            // TODO insert jobs in DB
 
 
             // To navigate, the action must be defined in the navigation graph XML
