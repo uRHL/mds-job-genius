@@ -1,6 +1,7 @@
 package com.canonicalexamples.jobgenius.app
 
 import android.app.Application
+import com.canonicalexamples.jobgenius.model.Job
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
 import com.google.gson.GsonBuilder
@@ -15,9 +16,9 @@ class JobGeniusApp: Application() {
     val database by lazy { JobDatabase.getInstance(this) }
     val webservice by lazy {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-            .build().create(JobService::class.java)
+                .baseUrl("https://jobs.github.com/positions.json/")
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
+                .build().create(JobService::class.java)
     }
     override fun onCreate() {
         super.onCreate()

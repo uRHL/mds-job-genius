@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "job_table")
 data class Job(
         @PrimaryKey(autoGenerate = true)
+        val pk: Int,
         // our parameters
         val fav: Boolean = false,
 

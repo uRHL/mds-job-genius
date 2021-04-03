@@ -8,21 +8,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.jobgenius.R
-import com.canonicalexamples.jobgenius.model.Job
-import com.canonicalexamples.jobgenius.model.JobService
+import com.canonicalexamples.jobgenius.app.JobGeniusApp
+import com.canonicalexamples.jobgenius.viewmodels.SearchViewModel
+import com.canonicalexamples.jobgenius.viewmodels.SearchViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
-import com.google.gson.GsonBuilder
-import retrofit2.Call
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import kotlinx.coroutines.runBlocking
 
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class SearchFragment : Fragment() {
+
+    private val viewModel: SearchViewModel by viewModels {
+        val app = activity?.application as JobGeniusApp
+        SearchViewModelFactory(app.database, app.webservice)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,31 +45,9 @@ class SearchFragment : Fragment() {
             // We try to read user input (if not null)
             val searchFilters = view.findViewById<TextInputLayout>(R.id.job_search_filter).editText?.text
             val isRemote = view.findViewById<CheckBox>(R.id.checkbox_remote).isChecked
-            println("Pues este es su texto: $searchFilters\nY este su remote: $isRemote")
-
-            // We create the service
-            val retrofit = Retrofit.Builder()
-                    .baseUrl("https://jobs.github.com/positions.json/")
-                    .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
-                    .build()
-
-            val service: JobService = retrofit.create(JobService::class.java)
-            var location: String = ""
-            if (isRemote){
-                location = "Remote"
+            runBlocking {
+                viewModel.onClickSearch(searchFilters.toString(),isRemote)
             }
-
-            //we make the call
-            val jobsCall: Call<List<Job>> = service.getJobs(1, searchFilters.toString(), location)
-            val policy = StrictMode.ThreadPolicy.Builder()
-                    .permitAll().build()
-            StrictMode.setThreadPolicy(policy)
-            val jobs: List<Job>? = jobsCall.execute().body()
-            //database.
-            // TODO insert jobs in DB
-
-
-            // To navigate, the action must be defined in the navigation graph XML
             findNavController().navigate(R.id.action_SearchFragment_to_JobListFragment)
         }
     }
