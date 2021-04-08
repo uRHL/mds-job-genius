@@ -17,7 +17,7 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
 
         val jobTitle = binding.basicInfo.jobTitle
         val jobCompany = binding.basicInfo.jobCompany
-        val jobType = binding.basicInfo.jobRemote
+        val jobLocation = binding.basicInfo.jobLocation
         val fav = binding.jobFav
         init {
             // Set the listener on the "more" button
@@ -35,13 +35,9 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
         //val job = viewModel.getJobCard(position)
         val job = jobList[position]
         with(holder){
-            jobTitle.text = job.title
-            jobCompany.text = job.company
-            if (job.location.toString().contains("remote")) {
-                holder.jobType.text = "Remote"
-            }else {
-                holder.jobType.text = "Not remote"
-            }
+            jobTitle.text = "Title: " + job.title
+            jobCompany.text = "Company: " + job.company
+            holder.jobLocation.text = "Location: " + job.location
         }
     }
 

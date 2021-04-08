@@ -14,24 +14,24 @@ class JobListViewModel(private val database: JobDatabase, private val webservice
     private val repository: JobRepository = JobRepository(database.jobDao())
     val jobList: LiveData<List<Job>> = repository.fetchJobs
 
-    data class JobCardShort(val title: String, val company: String, val remote: String, val fav: Boolean)
-    data class JobDetails(val title: String, val company: String, val remote: String, val fav: Boolean, val description: String, val logoUrl: String, val applyUrl: String  )
+//    data class JobCardShort(val title: String, val company: String, val location: String, val fav: Boolean)
+//    data class JobDetails(val title: String, val company: String, val location: String, val fav: Boolean, val description: String, val logoUrl: String, val applyUrl: String  )
 
 
 //    fun addButtonClicked() {
 //        _navigate.value = Event(true)
 //    }
 
-    fun getJobCard(n: Int): JobCardShort? {
-        if (jobList.value != null || n >= 0 || n < jobList.value!!.size){
-            return JobCardShort(
-                    jobList.value!![n].title,
-                    jobList.value!![n].company,
-                    jobList.value!![n].location,
-                    jobList.value!![n].fav)
-        }
-        return null
-    }
+//    fun getJobCard(n: Int): JobCardShort? {
+//        if (jobList.value != null || n >= 0 || n < jobList.value!!.size){
+//            return JobCardShort(
+//                    jobList.value!![n].title,
+//                    jobList.value!![n].company,
+//                    jobList.value!![n].location,
+//                    jobList.value!![n].fav)
+//        }
+//        return null
+//    }
 
     fun onClickJobMore(n: Int) {
         // Navigate to the fragment job details

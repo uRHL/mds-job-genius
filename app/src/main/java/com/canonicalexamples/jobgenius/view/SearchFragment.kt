@@ -45,6 +45,7 @@ class SearchFragment : Fragment() {
             // We try to read user input (if not null)
             val searchFilters = view.findViewById<TextInputLayout>(R.id.job_search_filter).editText?.text
             val isRemote = view.findViewById<CheckBox>(R.id.checkbox_remote).isChecked
+            println(searchFilters.toString())
             runBlocking {
                 viewModel.onClickSearch(searchFilters.toString(),isRemote)
             }

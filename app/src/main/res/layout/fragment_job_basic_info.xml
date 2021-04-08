@@ -61,7 +61,7 @@
         tools:text="@string/job_card_item_remote"/>
 
     <TextView
-        android:id="@+id/job_remote"
+        android:id="@+id/job_location"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
         android:text="TextView"

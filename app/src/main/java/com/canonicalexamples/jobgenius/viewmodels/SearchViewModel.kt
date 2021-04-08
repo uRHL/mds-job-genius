@@ -16,7 +16,7 @@ class SearchViewModel(private val database: JobDatabase, private val webservice:
     val navigate: LiveData<Event<Boolean>> = _navigate
 
     suspend fun onClickSearch(searchFilters: String, isRemote: Boolean) {
-        var location: String = ""
+        var location = ""
         if (isRemote){
             location = "Remote"
         }
