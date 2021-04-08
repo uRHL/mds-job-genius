@@ -13,7 +13,6 @@
     <string name="job_card_item_company">Company: </string>
     <string name="job_card_item_remote">Remote: </string>
     <string name="job_card_item_more_info">more info</string>
-    <string name="job_details_fragment_label">Job Details Fragment</string>
     <string name="job_card_item_fav_button_alt">favorite</string>
     <string name="job_card_item_apply_url">Apply now</string>
     <string name="job_card_item_start_tracking">Track this offer</string>

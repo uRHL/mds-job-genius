@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentJobListBinding
@@ -34,15 +37,21 @@ class JobListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.recyclerView.adapter = JobListAdapter(viewModel = viewModel)
+        val adapter = JobListAdapter(viewModel)
+
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val jobViewModel = ViewModelProvider(this).get(JobListViewModel::class.java)
+        jobViewModel.jobList.observe(viewLifecycleOwner, { job -> adapter.setData(job)})
 //        binding.fab.setOnClickListener {
 //            viewModel.addButtonClicked()
 //        }
 
-        viewModel.navigate.observeEvent(viewLifecycleOwner) { navigate ->
-            if (navigate) {
-                //findNavController().navigate(R.id.action_JobListFragment_to_SearchFragment)
-            }
-        }
+//        viewModel.navigate.observeEvent(viewLifecycleOwner) { navigate ->
+//            if (navigate) {
+//                //findNavController().navigate(R.id.action_JobListFragment_to_SearchFragment)
+//            }
+//        }
     }
 }
