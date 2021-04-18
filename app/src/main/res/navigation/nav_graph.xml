@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_SearchFragment_to_JobListFragment"
             app:destination="@id/JobListFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/JobListFragment"
@@ -49,5 +52,16 @@
         android:id="@id/JobApplicationWebFragment"
         android:name="com.canonicalexamples.jobgenius.view.JobApplicationWebFragment"
         tools:layout="@layout/fragment_job_application_web">
+    </fragment>
+
+    <fragment
+        android:id="@+id/LoginFragment"
+        android:name="com.canonicalexamples.jobgenius.view.LoginFragment"
+        android:label="@string/login_fragment_label"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_LoginFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
     </fragment>
 </navigation>

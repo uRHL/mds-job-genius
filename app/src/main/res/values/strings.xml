@@ -36,4 +36,6 @@
     <string name="bottom_nav_search">Discover</string>
     <string name="bottom_nav_favorites">Favorites</string>
     <string name="bottom_nav_applications">My applications</string>
+    <string name="default_web_client_id">asdf</string>
+    <string name="login_fragment_label">Login</string>
 </resources>
