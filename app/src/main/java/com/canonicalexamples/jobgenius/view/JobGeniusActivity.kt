@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.canonicalexamples.jobgenius.R
+import com.google.android.material.navigation.NavigationView
 
 class JobGeniusActivity : AppCompatActivity() {
 
@@ -24,9 +25,10 @@ class JobGeniusActivity : AppCompatActivity() {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
+        when (item.itemId) {
+            R.id.action_login -> setContentView(R.layout.fragment_login)
             else -> super.onOptionsItemSelected(item)
         }
+        return true
     }
 }
