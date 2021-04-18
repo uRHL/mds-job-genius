@@ -1,12 +1,15 @@
 package com.canonicalexamples.jobgenius.view
 
+import android.os.Build
 import android.os.Bundle
-import android.os.StrictMode
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.Toolbar
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +36,8 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
@@ -50,6 +55,18 @@ class SearchFragment : Fragment() {
                 viewModel.onClickSearch(searchFilters.toString(),isRemote)
             }
             findNavController().navigate(R.id.action_SearchFragment_to_JobListFragment)
+        }
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_login -> {
+                findNavController().navigate(R.id.action_SearchFragment_to_LoginFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
