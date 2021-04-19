@@ -1,11 +1,9 @@
 package com.canonicalexamples.jobgenius.viewmodels
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.canonicalexamples.jobgenius.model.JobDatabase
-import com.canonicalexamples.jobgenius.model.JobRepository
-import com.canonicalexamples.jobgenius.model.User
-import com.canonicalexamples.jobgenius.model.UserRepository
+import com.canonicalexamples.jobgenius.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.security.KeyStore
@@ -58,5 +56,15 @@ class LoginViewModel(private val database: JobDatabase) : ViewModel() {
         val spec = IvParameterSpec(ivBytes)
         cipher.init(Cipher.DECRYPT_MODE, getKey(), spec)
         return cipher.doFinal(data).toString(Charsets.UTF_8).trim()
+    }
+}
+
+class LoginViewModelFactory(private val database: JobDatabase) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return LoginViewModel(database) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

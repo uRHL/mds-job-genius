@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,9 +25,17 @@ import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
 import com.canonicalexamples.jobgenius.model.User
 import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
+import com.canonicalexamples.jobgenius.viewmodels.LoginViewModelFactory
+import com.canonicalexamples.jobgenius.viewmodels.SearchViewModel
+import com.canonicalexamples.jobgenius.viewmodels.SearchViewModelFactory
 
 
 class LoginFragment : Fragment() {
+
+    private val loginViewModel: LoginViewModel by viewModels {
+        val app = activity?.application as JobGeniusApp
+        LoginViewModelFactory(app.database)
+    }
 
     companion object{
         private const val RC_SIGN_IN = 120
@@ -35,7 +44,6 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-    private lateinit var loginViewModel: LoginViewModel
     //val app = activity?.application as JobGeniusApp
 
     override fun onCreateView(
@@ -44,7 +52,6 @@ class LoginFragment : Fragment() {
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         val view = binding.root
 
