@@ -3,11 +3,13 @@ package com.canonicalexamples.jobgenius.view
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +20,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.canonicalexamples.jobgenius.R
+import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
+import com.canonicalexamples.jobgenius.model.User
+import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
 
 
 class LoginFragment : Fragment() {
@@ -30,12 +35,17 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var loginViewModel: LoginViewModel
+    //val app = activity?.application as JobGeniusApp
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
         val view = binding.root
 
         auth = FirebaseAuth.getInstance()
@@ -95,9 +105,7 @@ class LoginFragment : Fragment() {
                         val user = auth.currentUser
                         if(user != null){
                             Log.d("****** ", user.email + "\t" + user.photoUrl + "\t" + user.displayName)
-                            // Save the user data in the encrypted in the database
-
-
+                            insertDataToDatabase(user.displayName, user.email, user.photoUrl.toString())
                             findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
                         }
                     } else {
@@ -106,6 +114,31 @@ class LoginFragment : Fragment() {
                 }
     }
 
+    private fun insertDataToDatabase(name: String, mail: String, image: String) {
+        val namePair = loginViewModel.encryptData(name)
+        val mailPair = loginViewModel.encryptData(mail)
+        val imagePair = loginViewModel.encryptData(image)
+
+        val nameIV = Base64.encodeToString(namePair.first, Base64.DEFAULT)
+        val nameEncodedText = Base64.encodeToString(namePair.second, Base64.DEFAULT)
+        val mailIV = Base64.encodeToString(mailPair.first, Base64.DEFAULT)
+        val mailEncodedText = Base64.encodeToString(mailPair.second, Base64.DEFAULT)
+        val imageIV = Base64.encodeToString(imagePair.first, Base64.DEFAULT)
+        val imageEncodedText = Base64.encodeToString(imagePair.second, Base64.DEFAULT)
+
+        val user = User(0,nameIV,nameEncodedText,mailIV,mailEncodedText,imageIV,imageEncodedText)
+//        val user = User(0, namePair, mailPair, imagePair)
+
+
+//        Log.d("Encrypt", "insertDataToDatabase: $pair")
+//        val encodedIV: String = Base64.encodeToString(pair.first, Base64.DEFAULT)
+//        val encodedText: String = Base64.encodeToString(pair.second, Base64.DEFAULT)
+//        val student = Student(0, firstName, lastName, Integer.parseInt(age.toString()),
+//                    encodedIV, encodedText)
+        loginViewModel.addUser(user)
+        Toast.makeText(requireContext(), "User logged in", Toast.LENGTH_LONG).show()
+        //findNavController().navigate(R.id.action_saveFragment_to_listFragment)
+    }
 
 
 }
