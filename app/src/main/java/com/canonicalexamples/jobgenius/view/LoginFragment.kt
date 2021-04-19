@@ -65,10 +65,6 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
-    private fun logOut() {
-        val logOutIntent = googleSignInClient.signOut()
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -79,6 +75,7 @@ class LoginFragment : Fragment() {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Log.d("Fragment Login", "firebaseAuthWithGoogle:" + account.id)
+                Log.d("****** ", account.email + "\t" + account.displayName + "\t" + account.photoUrl)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
@@ -97,6 +94,10 @@ class LoginFragment : Fragment() {
                         Log.d("Fragment Login", "signInWithCredential:success")
                         val user = auth.currentUser
                         if(user != null){
+                            Log.d("****** ", user.email + "\t" + user.photoUrl + "\t" + user.displayName)
+                            // Save the user data in the encrypted in the database
+
+
                             findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
                         }
                     } else {
