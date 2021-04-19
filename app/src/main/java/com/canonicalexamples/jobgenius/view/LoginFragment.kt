@@ -65,6 +65,10 @@ class LoginFragment : Fragment() {
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    private fun logOut() {
+        val logOutIntent = googleSignInClient.signOut()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 

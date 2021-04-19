@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/userAvatar"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:srcCompat="@drawable/business_man"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/double_fab_margin"
+        />
+
+    <TextView
+        android:id="@+id/userNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userWelcomeText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/userAvatar"
+        android:layout_marginStart="@dimen/double_fab_margin"
+        android:layout_marginTop="@dimen/double_fab_margin"
+        />
+
+    <TextView
+        android:id="@+id/userEmailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/userEmailText"
+        app:layout_constraintTop_toBottomOf="@id/userNameText"
+        app:layout_constraintStart_toEndOf="@id/userAvatar"
+        android:layout_marginStart="@dimen/double_fab_margin"
+        android:layout_marginTop="@dimen/double_fab_margin"
+        android:layout_marginBottom="@dimen/double_fab_margin"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

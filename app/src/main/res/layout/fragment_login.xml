@@ -6,16 +6,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="view.LoginFragment">
 
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sign_in_btn"
         android:layout_width="352dp"
         android:layout_height="54dp"
         android:layout_marginBottom="284dp"
-        android:backgroundTint="#fff"
         android:drawableStart="@drawable/ic_google"
         android:paddingStart="40dp"
         android:paddingEnd="40dp"
-        android:text="Sign in"
+        android:text="Sign in with Google"
         android:textColor="@color/black"
         android:textAllCaps="false"
         android:textSize="16sp"
@@ -23,6 +25,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/log_out_btn"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:background="#86FF0000"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:layout_marginStart="@dimen/double_fab_margin"
+        android:layout_marginEnd="@dimen/double_fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:text="Log out"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_in_btn" />
+
+    <include
+        layout="@layout/fragment_user_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/double_fab_margin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

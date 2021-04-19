@@ -18,6 +18,12 @@
     <string name="job_card_item_start_tracking">Track this offer</string>
     <string name="job_details_description_label">Description</string>
 
+    <!-- Log in fragment-->
+    <string name="login_fragment_label">Login</string>
+    <string name="action_login">Log in</string>
+    <!--  User details -->
+    <string name="userWelcomeText">Welcome user1!</string>
+    <string name="userEmailText">"user1@gmail.com "</string>
 
     <!--  Offer tracking -->
     <!-- Steps -->
@@ -36,6 +42,5 @@
     <string name="bottom_nav_search">Discover</string>
     <string name="bottom_nav_favorites">Favorites</string>
     <string name="bottom_nav_applications">My applications</string>
-    <string name="login_fragment_label">Login</string>
-    <string name="action_login">Log in</string>
+
 </resources>

@@ -7,12 +7,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:904860771841:android:e91f6c411454bd41388200",
+        "mobilesdk_app_id": "1:904860771841:android:3850e34c2018c584388200",
         "android_client_info": {
           "package_name": "com.canonicalexamples.jobgenius"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "904860771841-6rcvv93l7u9oe9j846ngavn2binkgvs7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.canonicalexamples.jobgenius",
+            "certificate_hash": "36c11271c8fbdd850ecd0721d8e2b424605d6e79"
+          }
+        },
         {
           "client_id": "904860771841-jr70rrtjqqliv8pk2fvfepcd2o7pifvg.apps.googleusercontent.com",
           "client_type": 3
