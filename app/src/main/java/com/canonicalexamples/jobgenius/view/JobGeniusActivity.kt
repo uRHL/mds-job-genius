@@ -1,10 +1,15 @@
 package com.canonicalexamples.jobgenius.view
 
+import android.os.Build
 import android.os.Bundle
+import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyProperties
 import android.view.Menu
 import android.view.MenuItem
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.canonicalexamples.jobgenius.R
+import javax.crypto.KeyGenerator
 
 class JobGeniusActivity : AppCompatActivity() {
 

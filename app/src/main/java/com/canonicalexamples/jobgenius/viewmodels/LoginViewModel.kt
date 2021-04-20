@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.canonicalexamples.jobgenius.model.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.NullPointerException
 import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
@@ -40,7 +41,13 @@ class LoginViewModel(private val database: JobDatabase) : ViewModel() {
     fun checkKey(): Boolean {
         val keystore: KeyStore = KeyStore.getInstance("AndroidKeyStore")
         keystore.load(null)
-        val secretKeyEntry = keystore.getEntry("MyKeyStore", null) as KeyStore.SecretKeyEntry
+        val secretKeyEntry: KeyStore.SecretKeyEntry
+        try {
+            secretKeyEntry = keystore.getEntry("MyKeyStore", null) as KeyStore.SecretKeyEntry
+        }catch (e: NullPointerException){
+            // No entry exists in the specified KeyStore
+            return false
+        }
         return secretKeyEntry.secretKey != null
     }
 
