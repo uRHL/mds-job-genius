@@ -1,35 +1,37 @@
 package com.canonicalexamples.jobgenius.view
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.os.Handler
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.canonicalexamples.jobgenius.R
+import com.canonicalexamples.jobgenius.app.JobGeniusApp
+import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
+import com.canonicalexamples.jobgenius.model.User
+import com.canonicalexamples.jobgenius.util.LoadImageURL
+import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
+import com.canonicalexamples.jobgenius.viewmodels.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.canonicalexamples.jobgenius.R
-import com.canonicalexamples.jobgenius.app.JobGeniusApp
-import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
-import com.canonicalexamples.jobgenius.model.User
-import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
-import com.canonicalexamples.jobgenius.viewmodels.LoginViewModelFactory
-import com.canonicalexamples.jobgenius.viewmodels.SearchViewModel
-import com.canonicalexamples.jobgenius.viewmodels.SearchViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import java.net.URL
 import javax.crypto.KeyGenerator
 
 
@@ -44,18 +46,19 @@ class LoginFragment : Fragment() {
         private const val RC_SIGN_IN = 120
     }
 
-    private lateinit var binding: FragmentLoginBinding
+    private lateinit var bindingLoginFragment: FragmentLoginBinding
+    //private lateinit var bindingUserDetailsFragment: FragmentUserDetailsBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        bindingLoginFragment = FragmentLoginBinding.inflate(inflater, container, false)
+        //bindingUserDetailsFragment = FragmentUserDetailsBinding.inflate(inflater, container, false)
 
-
-        val view = binding.root
+        val view = bindingLoginFragment.root
 
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
@@ -65,12 +68,12 @@ class LoginFragment : Fragment() {
             generateKey()
         }
 
-        // We do not want to navigate to search if there is a user already logged. Instead we want to show account details
-        /*
         if(user != null){
-            findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
+            // We do not want to navigate to search if there is a user already logged. Instead we want to show account details
+            //findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
+
         }
-        */
+
 
 
         // Configure Google Sign In
@@ -81,7 +84,7 @@ class LoginFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
 
-        binding.signInBtn.setOnClickListener{
+        bindingLoginFragment.signInBtn.setOnClickListener{
             signIn()
         }
 
@@ -90,7 +93,10 @@ class LoginFragment : Fragment() {
 
     private fun generateKey() {
         // Needed to update minSdkVersion to 23
-        val keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore")
+        val keyGenerator = KeyGenerator.getInstance(
+            KeyProperties.KEY_ALGORITHM_AES,
+            "AndroidKeyStore"
+        )
         val keyGenParameterSpec = KeyGenParameterSpec
             .Builder("MyKeyStore", KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
             .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
@@ -135,9 +141,24 @@ class LoginFragment : Fragment() {
                         Log.d("Fragment Login", "signInWithCredential:success")
                         val user = auth.currentUser
                         if(user != null){
-                            Log.d("****** ", user.email + "\t" + user.photoUrl + "\t" + user.displayName)
-                            insertDataToDatabase(user.displayName, user.email, user.photoUrl.toString())
-                            findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
+                            Log.d(
+                                "****** ",
+                                user.email + "\t" + user.photoUrl + "\t" + user.displayName
+                            )
+                            insertDataToDatabase(
+                                user.displayName,
+                                user.email,
+                                user.photoUrl.toString()
+                            )
+                            // Update the UI
+                            bindingLoginFragment.userDetails.userNameText.text = "Welcome " + user.displayName + "!"
+                            bindingLoginFragment.userDetails.userEmailText.text = user.email
+
+                            val bitmap: Bitmap? = LoadImageURL().execute(user.photoUrl.toString()).get()
+                            bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
+
+
+                            //findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
                         }
                     } else {
                         Log.w("Fragment Login", "signInWithCredential:failure", task.exception)
@@ -157,7 +178,15 @@ class LoginFragment : Fragment() {
         val imageIV = Base64.encodeToString(imagePair.first, Base64.DEFAULT)
         val imageEncodedText = Base64.encodeToString(imagePair.second, Base64.DEFAULT)
 
-        val user = User(0,nameIV,nameEncodedText,mailIV,mailEncodedText,imageIV,imageEncodedText)
+        val user = User(
+            0,
+            nameIV,
+            nameEncodedText,
+            mailIV,
+            mailEncodedText,
+            imageIV,
+            imageEncodedText
+        )
 //        val user = User(0, namePair, mailPair, imagePair)
 
 

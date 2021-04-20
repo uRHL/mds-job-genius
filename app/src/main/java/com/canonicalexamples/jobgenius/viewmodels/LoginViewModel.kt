@@ -38,6 +38,11 @@ class LoginViewModel(private val database: JobDatabase) : ViewModel() {
         }
     }
 
+    fun getLoggedUserDetails(){
+
+
+    }
+
     fun checkKey(): Boolean {
         val keystore: KeyStore = KeyStore.getInstance("AndroidKeyStore")
         keystore.load(null)

@@ -47,6 +47,7 @@
 
     <include
         layout="@layout/fragment_user_details"
+        android:id="@+id/userDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
