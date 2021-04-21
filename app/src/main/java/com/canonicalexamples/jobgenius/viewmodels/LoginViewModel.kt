@@ -15,6 +15,7 @@ import javax.crypto.spec.IvParameterSpec
 class LoginViewModel(private val database: JobDatabase) : ViewModel() {
 
     private val repository: UserRepository = UserRepository(database.userDao())
+    val userList: LiveData<List<User>> = repository.fetchUsers
 
     fun encryptData(data: String): Pair<ByteArray, ByteArray> {
         val cipher: Cipher = Cipher.getInstance("AES/CBC/NoPadding")

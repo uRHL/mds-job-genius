@@ -22,8 +22,7 @@
     <string name="login_fragment_label">Login</string>
     <string name="action_login">Account</string>
     <!--  User details -->
-    <string name="userWelcomeText">Welcome user1!</string>
-    <string name="userEmailText">"user1@gmail.com "</string>
+    <string name="userWelcomeText">Login with Google!</string>
 
     <!--  Offer tracking -->
     <!-- Steps -->
