@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gitHubJobs_base">#ADD9F3</color>
+    <color name="gitHubJobs_500">#0099F3</color>
+    <color name="gitHubJobs_700">#0649F3</color>
 </resources>

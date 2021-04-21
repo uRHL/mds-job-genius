@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,65 +10,68 @@
         android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionMode.Title"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/text_job_basic_info_headings"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        tools:text="@string/job_card_item_title" />
+        android:text="@string/job_card_item_title"
+        />
 
     <TextView
         android:id="@+id/job_title"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/job_title_label"
+        app:layout_constraintStart_toEndOf="@id/job_company_label"
         app:layout_constraintTop_toTopOf="@id/job_title_label"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="4dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/job_basic_info_inline_separator"
+        android:layout_marginTop="@dimen/job_basic_info_align_titles"/>
 
     <TextView
         android:id="@+id/job_company_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:textSize="@dimen/text_job_basic_info_headings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintTop_toBottomOf="@id/job_title_label"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/job_card_item_company"/>
+        android:text="@string/job_card_item_company"/>
 
     <TextView
         android:id="@+id/job_company"
-        android:layout_width="310dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@id/job_company_label"
         app:layout_constraintTop_toTopOf="@id/job_company_label"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="4dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/job_basic_info_inline_separator"
+        android:layout_marginTop="@dimen/job_basic_info_align_titles"/>
 
     <TextView
-        android:id="@+id/job_remote_label"
+        android:id="@+id/job_location_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:textSize="@dimen/text_job_basic_info_headings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintTop_toBottomOf="@id/job_company_label"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/job_card_item_remote"/>
+        android:text="@string/job_card_item_remote"/>
 
     <TextView
         android:id="@+id/job_location"
-        android:layout_width="325dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
-        app:layout_constraintStart_toEndOf="@id/job_remote_label"
-        app:layout_constraintTop_toTopOf="@id/job_remote_label"
-        android:layout_marginTop="3dp"
-        android:layout_marginStart="3dp"/>
+        app:layout_constraintStart_toEndOf="@id/job_company_label"
+        app:layout_constraintTop_toTopOf="@id/job_location_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/job_basic_info_inline_separator"
+        android:layout_marginTop="@dimen/job_basic_info_align_titles"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

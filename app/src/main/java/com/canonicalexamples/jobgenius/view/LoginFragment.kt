@@ -2,7 +2,6 @@ package com.canonicalexamples.jobgenius.view
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
@@ -28,8 +27,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.*
-import java.net.URL
 import javax.crypto.KeyGenerator
 
 
@@ -45,14 +42,13 @@ class LoginFragment : Fragment() {
     }
 
     private lateinit var bindingLoginFragment: FragmentLoginBinding
-    //private lateinit var bindingUserDetailsFragment: FragmentUserDetailsBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View {
         bindingLoginFragment = FragmentLoginBinding.inflate(inflater, container, false)
         //bindingUserDetailsFragment = FragmentUserDetailsBinding.inflate(inflater, container, false)
 
@@ -61,8 +57,8 @@ class LoginFragment : Fragment() {
 
 
         // We can use this to get the data from the current logged user
-//        auth = FirebaseAuth.getInstance()
-//        val user = auth.currentUser
+        auth = FirebaseAuth.getInstance()
+        //val user = auth.currentUser
 
 
         // Create out KeyStore instance, iff it is not created
@@ -82,14 +78,20 @@ class LoginFragment : Fragment() {
             signIn()
         }
 
+        bindingLoginFragment.logOutBtn.setOnClickListener {
+            auth.signOut()
+            loginViewModel.userList
+            Toast.makeText(view.context, "User logged out", Toast.LENGTH_SHORT).show()
+        }
+
         return view
     }
 
     private fun generateKey() {
         // Needed to update minSdkVersion to 23
         val keyGenerator = KeyGenerator.getInstance(
-            KeyProperties.KEY_ALGORITHM_AES,
-            "AndroidKeyStore"
+                KeyProperties.KEY_ALGORITHM_AES,
+                "AndroidKeyStore"
         )
         val keyGenParameterSpec = KeyGenParameterSpec
             .Builder("MyKeyStore", KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
@@ -135,30 +137,22 @@ class LoginFragment : Fragment() {
                         Log.d("Fragment Login", "signInWithCredential:success")
                         val user = auth.currentUser
                         if(user != null){
-                            Log.d(
-                                "****** ",
-                                user.email + "\t" + user.photoUrl + "\t" + user.displayName
-                            )
-                            insertDataToDatabase(
-                                user.displayName,
-                                user.email,
-                                user.photoUrl.toString()
-                            )
-                            //var u: User? = null
-                            loginViewModel.userList.observe(viewLifecycleOwner, { userList ->
+                            insertDataToDatabase(user.displayName, user.email, user.photoUrl.toString())
 
-                                val u = userList.get(userList.size - 1)
+                            loginViewModel.userList.observe(viewLifecycleOwner) { userList ->
 
-                                val name = loginViewModel.decryptData(Base64.decode(u.nameIV,Base64.DEFAULT),Base64.decode(u.nameEncodedText,Base64.DEFAULT))
-                                val mail = loginViewModel.decryptData(Base64.decode(u.mailIV,Base64.DEFAULT),Base64.decode(u.mailEncodedText,Base64.DEFAULT))
-                                val image = loginViewModel.decryptData(Base64.decode(u.imageIV,Base64.DEFAULT),Base64.decode(u.imageEncodedText,Base64.DEFAULT))
+                                val u = userList[userList.size - 1]
+
+                                val name = loginViewModel.decryptData(Base64.decode(u.nameIV, Base64.DEFAULT), Base64.decode(u.nameEncodedText, Base64.DEFAULT))
+                                val mail = loginViewModel.decryptData(Base64.decode(u.mailIV, Base64.DEFAULT), Base64.decode(u.mailEncodedText, Base64.DEFAULT))
+                                val image = loginViewModel.decryptData(Base64.decode(u.imageIV, Base64.DEFAULT), Base64.decode(u.imageEncodedText, Base64.DEFAULT))
 
                                 bindingLoginFragment.userDetails.userNameText.text = "Welcome $name!"
                                 bindingLoginFragment.userDetails.userEmailText.text = mail
 
                                 val bitmap: Bitmap? = LoadImageURL().execute(image).get()
                                 bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
-                            })
+                            }
                         }
                     } else {
                         Log.w("Fragment Login", "signInWithCredential:failure", task.exception)
@@ -179,13 +173,13 @@ class LoginFragment : Fragment() {
         val imageEncodedText = Base64.encodeToString(imagePair.second, Base64.DEFAULT)
 
         val user = User(
-            0,
-            nameIV,
-            nameEncodedText,
-            mailIV,
-            mailEncodedText,
-            imageIV,
-            imageEncodedText
+                0,
+                nameIV,
+                nameEncodedText,
+                mailIV,
+                mailEncodedText,
+                imageIV,
+                imageEncodedText
         )
 //        val user = User(0, namePair, mailPair, imagePair)
 

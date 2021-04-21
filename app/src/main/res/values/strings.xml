@@ -11,8 +11,8 @@
     <string name="job_list_fragment_label">Job List Fragment</string>
     <string name="job_card_item_title">Title: </string>
     <string name="job_card_item_company">Company: </string>
-    <string name="job_card_item_remote">Remote: </string>
-    <string name="job_card_item_more_info">more info</string>
+    <string name="job_card_item_remote">Location: </string>
+    <string name="job_card_item_more_info">more</string>
     <string name="job_card_item_fav_button_alt">favorite</string>
     <string name="job_card_item_apply_url">Apply now</string>
     <string name="job_card_item_start_tracking">Track this offer</string>
@@ -23,6 +23,7 @@
     <string name="action_login">Account</string>
     <!--  User details -->
     <string name="userWelcomeText">Login with Google!</string>
+    <string name="userEmailText"></string>
 
     <!--  Offer tracking -->
     <!-- Steps -->
