@@ -2,24 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <include
         layout="@layout/fragment_job_basic_info"
         android:id="@+id/basic_info"
-        android:layout_width="300dp"
+        android:layout_width="295dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="@dimen/fab_margin"
+        android:paddingBottom="@dimen/fab_margin"/>
 
     <ImageButton
         android:id="@+id/job_fav"
-        android:layout_width="50dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="@dimen/fab_margin"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/basic_info"
         android:background="@drawable/favorites"
@@ -34,5 +36,13 @@
         app:layout_constraintBottom_toBottomOf="@id/basic_info"
         app:layout_constraintRight_toRightOf="parent"
         android:text="@string/job_card_item_more_info" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintTop_toBottomOf="@id/basic_info"
+        android:layout_marginTop="@dimen/fab_margin"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

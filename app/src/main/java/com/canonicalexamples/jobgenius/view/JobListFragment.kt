@@ -43,7 +43,7 @@ class JobListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val jobViewModel = ViewModelProvider(this).get(JobListViewModel::class.java)
-        jobViewModel.jobList.observe(viewLifecycleOwner, { job -> adapter.setData(job)})
+        jobViewModel.jobList.observe(viewLifecycleOwner, { job -> adapter.setData(job) })
 //        binding.fab.setOnClickListener {
 //            viewModel.addButtonClicked()
 //        }

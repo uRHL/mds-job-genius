@@ -1,5 +1,6 @@
 package com.canonicalexamples.jobgenius.view
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,19 +14,22 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
 
     private var jobList = listOf<Job>()
 
-    class JobItemViewHolder(private val viewModel: JobListViewModel, binding: JobCardItemBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        val jobTitle = binding.basicInfo.jobTitle
-        val jobCompany = binding.basicInfo.jobCompany
-        val jobLocation = binding.basicInfo.jobLocation
-        val fav = binding.jobFav
+    //class JobItemViewHolder(private val viewModel: JobListViewModel, binding: JobCardItemBinding): RecyclerView.ViewHolder(binding.root), View.OnClickListener {
+    class JobItemViewHolder(val viewModel: JobListViewModel, val binding: JobCardItemBinding) : RecyclerView.ViewHolder(binding.root){
+//        val jobTitle = binding.basicInfo.jobTitle
+//        val jobTitleLabel = binding.basicInfo.jobTitleLabel
+//        val jobCompany = binding.basicInfo.jobCompany
+//        val jobLocation = binding.basicInfo.jobLocation
+//        val fav = binding.jobFav
         init {
             // Set the listener on the "more" button
-            binding.jobMore.setOnClickListener(this)
+            //binding.jobMore.setOnClickListener()
+            binding.jobMore.setOnClickListener { viewModel.onClickJobMore(layoutPosition) }
         }
-        override fun onClick(v: View?) {
-            viewModel.onClickJobMore(layoutPosition)
-        }
+//        fun onClick(v: View?) {
+//            viewModel.onClickJobMore(layoutPosition)
+//        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): JobItemViewHolder =
@@ -35,9 +39,9 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
         //val job = viewModel.getJobCard(position)
         val job = jobList[position]
         with(holder){
-            jobTitle.text = "Title: " + job.title
-            jobCompany.text = "Company: " + job.company
-            holder.jobLocation.text = "Location: " + job.location
+            binding.basicInfo.jobTitle.text = "Title: " + job.title
+            binding.basicInfo.jobCompany.text = "Company: " + job.company
+            binding.basicInfo.jobLocation.text = "Location: " + job.location
         }
     }
 
