@@ -1,5 +1,6 @@
 package com.canonicalexamples.jobgenius.viewmodels
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,7 @@ import javax.crypto.spec.IvParameterSpec
 class LoginViewModel(private val database: JobDatabase) : ViewModel() {
 
     private val repository: UserRepository = UserRepository(database.userDao())
+    val userList: LiveData<List<User>> = repository.fetchUsers
 
     fun encryptData(data: String): Pair<ByteArray, ByteArray> {
         val cipher: Cipher = Cipher.getInstance("AES/CBC/NoPadding")

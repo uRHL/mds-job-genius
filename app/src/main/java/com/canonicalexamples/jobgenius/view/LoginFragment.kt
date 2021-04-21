@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
@@ -27,10 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.net.URL
 import javax.crypto.KeyGenerator
 
@@ -150,15 +148,21 @@ class LoginFragment : Fragment() {
                                 user.email,
                                 user.photoUrl.toString()
                             )
-                            // Update the UI
-                            bindingLoginFragment.userDetails.userNameText.text = "Welcome " + user.displayName + "!"
-                            bindingLoginFragment.userDetails.userEmailText.text = user.email
+                            //var u: User? = null
+                            loginViewModel.userList.observe(viewLifecycleOwner) { userList ->
 
-                            val bitmap: Bitmap? = LoadImageURL().execute(user.photoUrl.toString()).get()
-                            bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
+                                val u = userList.get(userList.size - 1)
 
+                                val name = loginViewModel.decryptData(Base64.decode(u.nameIV,Base64.DEFAULT),Base64.decode(u.nameEncodedText,Base64.DEFAULT))
+                                val mail = loginViewModel.decryptData(Base64.decode(u.mailIV,Base64.DEFAULT),Base64.decode(u.mailEncodedText,Base64.DEFAULT))
+                                val image = loginViewModel.decryptData(Base64.decode(u.imageIV,Base64.DEFAULT),Base64.decode(u.imageEncodedText,Base64.DEFAULT))
 
-                            //findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
+                                bindingLoginFragment.userDetails.userNameText.text = "Welcome " + name + "!"
+                                bindingLoginFragment.userDetails.userEmailText.text = mail
+
+                                val bitmap: Bitmap? = LoadImageURL().execute(image).get()
+                                bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
+                            }
                         }
                     } else {
                         Log.w("Fragment Login", "signInWithCredential:failure", task.exception)
