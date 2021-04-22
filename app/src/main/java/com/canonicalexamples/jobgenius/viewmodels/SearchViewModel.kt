@@ -2,12 +2,10 @@ package com.canonicalexamples.jobgenius.viewmodels
 
 import android.os.StrictMode
 import androidx.lifecycle.*
-import com.canonicalexamples.jobgenius.model.Job
+import com.canonicalexamples.jobgenius.model.job.Job
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
 import com.canonicalexamples.jobgenius.util.Event
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import retrofit2.Call
 
 

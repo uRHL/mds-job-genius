@@ -1,4 +1,4 @@
-package com.canonicalexamples.jobgenius.model
+package com.canonicalexamples.jobgenius.model.job
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -8,8 +8,6 @@ import androidx.room.PrimaryKey
 data class Job(
         @PrimaryKey(autoGenerate = true)
         val pk: Int,
-        // our parameters
-        val fav: Boolean = false,
 
         // github jobs api fields
         var id: String = "",

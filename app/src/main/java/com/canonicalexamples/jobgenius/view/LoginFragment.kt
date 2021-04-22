@@ -17,8 +17,9 @@ import androidx.lifecycle.observe
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
-import com.canonicalexamples.jobgenius.model.User
+import com.canonicalexamples.jobgenius.model.user.User
 import com.canonicalexamples.jobgenius.util.LoadImageURL
+import com.canonicalexamples.jobgenius.util.SecureStorage
 import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
 import com.canonicalexamples.jobgenius.viewmodels.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -37,6 +38,7 @@ class LoginFragment : Fragment() {
         LoginViewModelFactory(app.database)
     }
 
+
     companion object{
         private const val RC_SIGN_IN = 120
     }
@@ -44,6 +46,7 @@ class LoginFragment : Fragment() {
     private lateinit var bindingLoginFragment: FragmentLoginBinding
     private lateinit var auth : FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private val secureStorage: SecureStorage = SecureStorage()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -54,17 +57,17 @@ class LoginFragment : Fragment() {
 
         val view = bindingLoginFragment.root
 
-
-
+        val app = activity?.application as JobGeniusApp
+        auth = app.auth
         // We can use this to get the data from the current logged user
-        auth = FirebaseAuth.getInstance()
+//        auth = FirebaseAuth.getInstance()
         //val user = auth.currentUser
 
 
-        // Create out KeyStore instance, iff it is not created
-        if(!loginViewModel.checkKey()){
-            generateKey()
-        }
+        // Create our KeyStore instance, iff it is not created
+//        if(!loginViewModel.checkKey()){
+//            generateKey()
+//        }
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -87,21 +90,21 @@ class LoginFragment : Fragment() {
         return view
     }
 
-    private fun generateKey() {
-        // Needed to update minSdkVersion to 23
-        val keyGenerator = KeyGenerator.getInstance(
-                KeyProperties.KEY_ALGORITHM_AES,
-                "AndroidKeyStore"
-        )
-        val keyGenParameterSpec = KeyGenParameterSpec
-            .Builder("MyKeyStore", KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
-            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
-            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-            .build()
-
-        keyGenerator.init(keyGenParameterSpec)
-        keyGenerator.generateKey()
-    }
+//    private fun generateKey() {
+//        // Needed to update minSdkVersion to 23
+//        val keyGenerator = KeyGenerator.getInstance(
+//                KeyProperties.KEY_ALGORITHM_AES,
+//                "AndroidKeyStore"
+//        )
+//        val keyGenParameterSpec = KeyGenParameterSpec
+//            .Builder("MyKeyStore", KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
+//            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
+//            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
+//            .build()
+//
+//        keyGenerator.init(keyGenParameterSpec)
+//        keyGenerator.generateKey()
+//    }
 
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
@@ -136,6 +139,7 @@ class LoginFragment : Fragment() {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("Fragment Login", "signInWithCredential:success")
                         val user = auth.currentUser
+
                         if(user != null){
                             insertDataToDatabase(user.displayName, user.email, user.photoUrl.toString())
 
@@ -143,9 +147,9 @@ class LoginFragment : Fragment() {
 
                                 val u = userList[userList.size - 1]
 
-                                val name = loginViewModel.decryptData(Base64.decode(u.nameIV, Base64.DEFAULT), Base64.decode(u.nameEncodedText, Base64.DEFAULT))
-                                val mail = loginViewModel.decryptData(Base64.decode(u.mailIV, Base64.DEFAULT), Base64.decode(u.mailEncodedText, Base64.DEFAULT))
-                                val image = loginViewModel.decryptData(Base64.decode(u.imageIV, Base64.DEFAULT), Base64.decode(u.imageEncodedText, Base64.DEFAULT))
+                                val name = secureStorage.decryptData(Base64.decode(u.nameIV, Base64.DEFAULT), Base64.decode(u.nameEncodedText, Base64.DEFAULT))
+                                val mail = secureStorage.decryptData(Base64.decode(u.mailIV, Base64.DEFAULT), Base64.decode(u.mailEncodedText, Base64.DEFAULT))
+                                val image = secureStorage.decryptData(Base64.decode(u.imageIV, Base64.DEFAULT), Base64.decode(u.imageEncodedText, Base64.DEFAULT))
 
                                 bindingLoginFragment.userDetails.userNameText.text = "Welcome $name!"
                                 bindingLoginFragment.userDetails.userEmailText.text = mail
@@ -161,9 +165,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun insertDataToDatabase(name: String, mail: String, image: String) {
-        val namePair = loginViewModel.encryptData(name)
-        val mailPair = loginViewModel.encryptData(mail)
-        val imagePair = loginViewModel.encryptData(image)
+        val namePair = secureStorage.encryptData(name)
+        val mailPair = secureStorage.encryptData(mail)
+        val imagePair = secureStorage.encryptData(image)
 
         val nameIV = Base64.encodeToString(namePair.first, Base64.DEFAULT)
         val nameEncodedText = Base64.encodeToString(namePair.second, Base64.DEFAULT)

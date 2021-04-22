@@ -22,6 +22,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="@dimen/text_job_basic_info_content"
         app:layout_constraintStart_toEndOf="@id/job_company_label"
         app:layout_constraintTop_toTopOf="@id/job_title_label"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +36,7 @@
         android:layout_marginTop="@dimen/fab_margin"
         android:textSize="@dimen/text_job_basic_info_headings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@id/job_title_label"
+        app:layout_constraintTop_toBottomOf="@id/job_title"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/job_card_item_company"/>
 
@@ -44,6 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="@dimen/text_job_basic_info_content"
         app:layout_constraintStart_toEndOf="@id/job_company_label"
         app:layout_constraintTop_toTopOf="@id/job_company_label"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +59,7 @@
         android:layout_marginTop="@dimen/fab_margin"
         android:textSize="@dimen/text_job_basic_info_headings"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@id/job_company_label"
+        app:layout_constraintTop_toBottomOf="@id/job_company"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/job_card_item_remote"/>
 
@@ -66,6 +68,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="@dimen/text_job_basic_info_content"
         app:layout_constraintStart_toEndOf="@id/job_company_label"
         app:layout_constraintTop_toTopOf="@id/job_location_label"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,4 +1,4 @@
-package com.canonicalexamples.jobgenius.model
+package com.canonicalexamples.jobgenius.model.user
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

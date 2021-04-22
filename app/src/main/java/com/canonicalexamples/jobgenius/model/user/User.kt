@@ -1,4 +1,4 @@
-package com.canonicalexamples.jobgenius.model
+package com.canonicalexamples.jobgenius.model.user
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

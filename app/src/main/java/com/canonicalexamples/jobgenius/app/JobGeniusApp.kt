@@ -1,9 +1,12 @@
 package com.canonicalexamples.jobgenius.app
 
 import android.app.Application
-import com.canonicalexamples.jobgenius.model.Job
+import android.content.Context
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +23,13 @@ class JobGeniusApp: Application() {
                 .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
                 .build().create(JobService::class.java)
     }
+
+    val auth : FirebaseAuth by lazy {
+        //FirebaseApp.initializeApp(this)
+        FirebaseAuth.getInstance()
+    }
+    //val googleSignInClient: GoogleSignInClient
+
     override fun onCreate() {
         super.onCreate()
 

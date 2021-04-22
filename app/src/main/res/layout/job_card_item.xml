@@ -22,12 +22,12 @@
 
     <ImageButton
         android:id="@+id/job_fav"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="@dimen/fab_margin"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/job_more"
         app:layout_constraintTop_toTopOf="@id/basic_info"
-        android:background="@drawable/favorites"
+        android:background="@drawable/ic_empty_heart"
         android:contentDescription="@string/job_card_item_fav_button_alt" />
 
     <com.google.android.material.button.MaterialButton

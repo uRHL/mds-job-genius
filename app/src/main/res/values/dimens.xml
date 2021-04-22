@@ -2,10 +2,11 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="double_fab_margin">32dp</dimen>
     <dimen name="half_fab_margin">8dp</dimen>
-    <dimen name="job_basic_info_align_titles">3dp</dimen>
+    <dimen name="job_basic_info_align_titles">2dp</dimen>
     <dimen name="job_basic_info_inline_separator">4dp</dimen>
 
     <!-- Font sizes -->
     <dimen name="text_job_basic_info_headings">17sp</dimen>
+    <dimen name="text_job_basic_info_content">15sp</dimen>
 
 </resources>

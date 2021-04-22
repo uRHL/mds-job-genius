@@ -9,12 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.ActivityJobListingBinding
-import com.canonicalexamples.jobgenius.databinding.FragmentJobListBinding
-import com.canonicalexamples.jobgenius.util.observeEvent
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModelFactory
 
-class JobListFragment : Fragment() {
+class FavoriteJobListFragment : Fragment() {
 
     private lateinit var binding: ActivityJobListingBinding
     private val viewModel: JobListViewModel by viewModels {
@@ -35,13 +33,13 @@ class JobListFragment : Fragment() {
 
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = JobListAdapter(viewModel)
+        val adapter = FavoriteJobListAdapter(viewModel)
 
         binding.jobList.recyclerView.adapter = adapter
         binding.jobList.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //val jobViewModel = ViewModelProvider(this).get(JobListViewModel::class.java)
-        viewModel.jobList.observe(viewLifecycleOwner, { job -> adapter.setData(job) })
+        viewModel.fabJobList.observe(viewLifecycleOwner, { fabJob -> adapter.setData(fabJob) })
 
 //        binding.fab.setOnClickListener {
 //            viewModel.addButtonClicked()

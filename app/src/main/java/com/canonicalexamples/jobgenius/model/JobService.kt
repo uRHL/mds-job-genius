@@ -1,5 +1,6 @@
 package com.canonicalexamples.jobgenius.model
 
+import com.canonicalexamples.jobgenius.model.job.Job
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

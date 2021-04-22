@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.canonicalexamples.jobgenius.R
 import javax.crypto.KeyGenerator
 
@@ -17,6 +18,7 @@ class JobGeniusActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_job_genius)
         setSupportActionBar(findViewById(R.id.toolbar))
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -12,20 +12,23 @@
 
         <action
             android:id="@+id/action_SearchFragment_to_JobListFragment"
-            app:destination="@id/JobListFragment" />
+            app:destination="@id/JobListingActivity" />
         <action
             android:id="@+id/action_SearchFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/JobListFragment"
+        android:id="@+id/JobListingActivity"
         android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
         android:label="@string/job_list_fragment_label"
         tools:layout="@layout/activity_job_listing">
 
         <action
-            android:id="@+id/action_JobListFragment_to_JobDetailsFragment"
+            android:id="@+id/action_JobListingActivity_to_JobDetailsFragment"
             app:destination="@+id/JobDetailsFragment"/>
+        <action
+            android:id="@+id/action_JobListingActivity_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
     </fragment>
 
     <fragment
