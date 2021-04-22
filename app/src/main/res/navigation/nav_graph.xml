@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_SearchFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_SearchFragment_to_JobFavListingFragment"
+            app:destination="@id/JobFavListingFragment" />
     </fragment>
     <fragment
         android:id="@+id/JobListingActivity"
@@ -28,6 +31,24 @@
             app:destination="@+id/JobDetailsFragment"/>
         <action
             android:id="@+id/action_JobListingActivity_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_JobListingActivity_to_JobFavListingFragment"
+            app:destination="@id/JobFavListingFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/JobFavListingFragment"
+        android:name="com.canonicalexamples.jobgenius.view.FavoriteJobListFragment"
+        android:label="@string/job_fav_list_fragment_label"
+        tools:layout="@layout/fragment_fav_job_listing">
+
+        <action
+            android:id="@+id/action_JobFavListingFragment_to_JobDetailsFragment"
+            app:destination="@+id/JobDetailsFragment"/>
+        <action
+            android:id="@+id/action_JobFavListingFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
 
@@ -43,6 +64,9 @@
         <action
             android:id="@+id/action_JobDetailsFragment_to_JobApplicationWebFragment"
             app:destination="@+id/JobApplicationWebFragment"/>
+        <action
+            android:id="@+id/action_JobDetailsFragment_to_JobFavListingFragment"
+            app:destination="@id/JobFavListingFragment" />
     </fragment>
 
     <fragment
@@ -60,5 +84,8 @@
         <action
             android:id="@+id/action_LoginFragment_to_SearchFragment"
             app:destination="@id/SearchFragment" />
+        <action
+            android:id="@+id/action_LoginFragment_to_JobFavListingFragment"
+            app:destination="@id/JobFavListingFragment" />
     </fragment>
 </navigation>

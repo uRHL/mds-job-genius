@@ -63,7 +63,14 @@ class SearchFragment : Fragment() {
                 findNavController().navigate(R.id.action_SearchFragment_to_LoginFragment)
                 true
             }
+
+            R.id.action_favorites -> {
+                findNavController().navigate(R.id.action_SearchFragment_to_JobFavListingFragment)
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

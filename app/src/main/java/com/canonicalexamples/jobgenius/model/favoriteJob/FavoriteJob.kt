@@ -33,7 +33,7 @@ data class FavoriteJob(
 
     companion object{
 
-        fun parseJob(job: Job): FavoriteJob {
+        fun parseJob(uid: String, job: Job): FavoriteJob {
             return FavoriteJob(0, "","","","",job.id, job.type, job.url, job.created_at, job.company, job.company_url, job.location, job.title, job.description, job.how_to_apply, job.company_logo )
         }
     }

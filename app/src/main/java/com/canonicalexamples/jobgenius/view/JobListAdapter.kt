@@ -2,14 +2,13 @@ package com.canonicalexamples.jobgenius.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.databinding.JobCardItemBinding
-import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJob
 import com.canonicalexamples.jobgenius.model.job.Job
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
+import kotlinx.coroutines.runBlocking
 
 
 class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adapter<JobListAdapter.JobItemViewHolder>() {
@@ -25,21 +24,31 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
             // Set the listener on the "favorite" button
             binding.jobFav.setOnClickListener {
 
-                // Swap the favorite state
-                fav = !fav
+                if(viewModel.isUserLogged()){
 
-                viewModel.onClickJobFav(layoutPosition, fav)
-
-                // Update the UI according to the changes
-                if(fav){
-                    binding.jobFav.setImageResource(R.drawable.ic_filled_heart)
-                    Toast.makeText(binding.root.context, "Job added to favorites", Toast.LENGTH_LONG).show()
+                    runBlocking {
+                        // OnClick will return a positive Integer if the operation was successfull
+                        when (viewModel.onClickJobFav(layoutPosition, fav, binding)) {
+                            1 -> switchFavouriteStatus()
+                            else -> { Toast.makeText(binding.root.context, "It was not possible to save the job", Toast.LENGTH_LONG).show() }
+                        }
+                    }
                 }else {
-                    binding.jobFav.setImageResource(R.drawable.ic_empty_heart)
-                    Toast.makeText(binding.root.context, "Job removed from favorites", Toast.LENGTH_LONG).show()
+                    Toast.makeText(binding.root.context, "You have to be logged in", Toast.LENGTH_LONG).show()
                 }
+            }
+        }
 
-
+        private fun switchFavouriteStatus() {
+            fav = !fav
+            if(fav){
+                // Job successfully saved as favorite
+                binding.jobFav.setImageResource(R.drawable.ic_filled_heart)
+                Toast.makeText(binding.root.context, "Job added to favorites", Toast.LENGTH_LONG).show()
+            }else{
+                // Job successfully removed from favorites
+                binding.jobFav.setImageResource(R.drawable.ic_empty_heart)
+                Toast.makeText(binding.root.context, "Job removed from favorites", Toast.LENGTH_LONG).show()
             }
         }
     }

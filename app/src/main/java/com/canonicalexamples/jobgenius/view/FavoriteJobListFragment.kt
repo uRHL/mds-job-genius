@@ -1,14 +1,18 @@
 package com.canonicalexamples.jobgenius.view
 
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.ActivityJobListingBinding
+import com.canonicalexamples.jobgenius.model.user.User
+import com.canonicalexamples.jobgenius.util.SecureStorage
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModelFactory
 
