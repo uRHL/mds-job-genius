@@ -15,7 +15,7 @@ data class FavoriteJob(
         val statusIV: String = "",
         val statusEncodedText: String = "",
 
-        // github jobs api fields
+        // favorite jobs fields
         var id: String = "",
         var type: String = "",
         var url: String = "",

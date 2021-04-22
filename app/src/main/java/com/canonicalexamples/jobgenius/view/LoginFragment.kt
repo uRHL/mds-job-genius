@@ -3,8 +3,6 @@ package com.canonicalexamples.jobgenius.view
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.security.keystore.KeyGenParameterSpec
-import android.security.keystore.KeyProperties
 import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
@@ -28,7 +26,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import javax.crypto.KeyGenerator
 
 
 class LoginFragment : Fragment() {
@@ -53,21 +50,11 @@ class LoginFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View {
         bindingLoginFragment = FragmentLoginBinding.inflate(inflater, container, false)
-        //bindingUserDetailsFragment = FragmentUserDetailsBinding.inflate(inflater, container, false)
 
         val view = bindingLoginFragment.root
 
         val app = activity?.application as JobGeniusApp
         auth = app.auth
-        // We can use this to get the data from the current logged user
-//        auth = FirebaseAuth.getInstance()
-        //val user = auth.currentUser
-
-
-        // Create our KeyStore instance, iff it is not created
-//        if(!loginViewModel.checkKey()){
-//            generateKey()
-//        }
 
         // Configure Google Sign In
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -90,22 +77,6 @@ class LoginFragment : Fragment() {
         return view
     }
 
-//    private fun generateKey() {
-//        // Needed to update minSdkVersion to 23
-//        val keyGenerator = KeyGenerator.getInstance(
-//                KeyProperties.KEY_ALGORITHM_AES,
-//                "AndroidKeyStore"
-//        )
-//        val keyGenParameterSpec = KeyGenParameterSpec
-//            .Builder("MyKeyStore", KeyProperties.PURPOSE_ENCRYPT or KeyProperties.PURPOSE_DECRYPT)
-//            .setBlockModes(KeyProperties.BLOCK_MODE_CBC)
-//            .setEncryptionPaddings(KeyProperties.ENCRYPTION_PADDING_NONE)
-//            .build()
-//
-//        keyGenerator.init(keyGenParameterSpec)
-//        keyGenerator.generateKey()
-//    }
-
     private fun signIn() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -120,8 +91,6 @@ class LoginFragment : Fragment() {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
-//                Log.d("Fragment Login", "firebaseAuthWithGoogle:" + account.id)
-//                Log.d("****** ", account.email + "\t" + account.displayName + "\t" + account.photoUrl)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
@@ -185,18 +154,7 @@ class LoginFragment : Fragment() {
                 imageIV,
                 imageEncodedText
         )
-//        val user = User(0, namePair, mailPair, imagePair)
-
-
-//        Log.d("Encrypt", "insertDataToDatabase: $pair")
-//        val encodedIV: String = Base64.encodeToString(pair.first, Base64.DEFAULT)
-//        val encodedText: String = Base64.encodeToString(pair.second, Base64.DEFAULT)
-//        val student = Student(0, firstName, lastName, Integer.parseInt(age.toString()),
-//                    encodedIV, encodedText)
         loginViewModel.addUser(user)
         Toast.makeText(requireContext(), "User logged in", Toast.LENGTH_LONG).show()
-        //findNavController().navigate(R.id.action_saveFragment_to_listFragment)
     }
-
-
 }

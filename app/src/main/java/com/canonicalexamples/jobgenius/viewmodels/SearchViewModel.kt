@@ -24,12 +24,10 @@ class SearchViewModel(private val database: JobDatabase, private val webservice:
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         val jobs: List<Job>? = jobsCall.execute().body()
-        //print(jobs)
         val listIterator = jobs?.listIterator()
         if (listIterator != null) {
             while (listIterator.hasNext()){
                 var job: Job =listIterator.next()
-                //print(job)
                 database.jobDao().addJob(job)
             }
         }

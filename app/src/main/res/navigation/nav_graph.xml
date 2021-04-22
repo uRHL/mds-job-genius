@@ -52,12 +52,6 @@
     </fragment>
 
     <fragment
-        android:id="@id/JobApplicationWebFragment"
-        android:name="com.canonicalexamples.jobgenius.view.JobApplicationWebFragment"
-        tools:layout="@layout/fragment_job_application_web">
-    </fragment>
-
-    <fragment
         android:id="@+id/LoginFragment"
         android:name="com.canonicalexamples.jobgenius.view.LoginFragment"
         android:label="@string/login_fragment_label"

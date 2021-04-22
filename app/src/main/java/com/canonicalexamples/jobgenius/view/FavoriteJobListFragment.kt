@@ -38,17 +38,6 @@ class FavoriteJobListFragment : Fragment() {
         binding.jobList.recyclerView.adapter = adapter
         binding.jobList.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        //val jobViewModel = ViewModelProvider(this).get(JobListViewModel::class.java)
         viewModel.fabJobList.observe(viewLifecycleOwner, { fabJob -> adapter.setData(fabJob) })
-
-//        binding.fab.setOnClickListener {
-//            viewModel.addButtonClicked()
-//        }
-
-//        viewModel.navigate.observeEvent(viewLifecycleOwner) { navigate ->
-//            if (navigate) {
-//                //findNavController().navigate(R.id.action_JobListFragment_to_SearchFragment)
-//            }
-//        }
     }
 }

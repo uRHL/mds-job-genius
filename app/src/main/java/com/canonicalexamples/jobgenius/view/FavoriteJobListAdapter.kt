@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.canonicalexamples.jobgenius.databinding.JobCardItemBinding
 import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJob
-import com.canonicalexamples.jobgenius.model.job.Job
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 
 
