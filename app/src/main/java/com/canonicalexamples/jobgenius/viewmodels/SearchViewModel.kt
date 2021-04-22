@@ -5,13 +5,10 @@ import androidx.lifecycle.*
 import com.canonicalexamples.jobgenius.model.job.Job
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
-import com.canonicalexamples.jobgenius.util.Event
 import retrofit2.Call
 
 
 class SearchViewModel(private val database: JobDatabase, private val webservice: JobService) : ViewModel() {
-    private val _navigate: MutableLiveData<Event<Boolean>> = MutableLiveData()
-    val navigate: LiveData<Event<Boolean>> = _navigate
 
     suspend fun onClickSearch(searchFilters: String, isRemote: Boolean) {
         var location = ""

@@ -8,14 +8,11 @@ import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJob
 import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJobDao
 import com.canonicalexamples.jobgenius.model.job.Job
 import com.canonicalexamples.jobgenius.model.job.JobDao
-import com.canonicalexamples.jobgenius.model.user.User
-import com.canonicalexamples.jobgenius.model.user.UserDao
 
 
-@Database(entities = [Job::class, User::class, FavoriteJob::class], version = 5, exportSchema = false)
+@Database(entities = [Job::class, FavoriteJob::class], version = 6, exportSchema = false)
 abstract class JobDatabase: RoomDatabase() {
     abstract fun jobDao(): JobDao
-    abstract fun userDao(): UserDao
     abstract fun favoriteJobDao(): FavoriteJobDao
 
     companion object {

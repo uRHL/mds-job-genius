@@ -2,10 +2,6 @@ package com.canonicalexamples.jobgenius.util
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import androidx.lifecycle.viewModelScope
-import com.canonicalexamples.jobgenius.model.user.User
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.lang.NullPointerException
 import java.security.KeyStore
 import javax.crypto.Cipher
