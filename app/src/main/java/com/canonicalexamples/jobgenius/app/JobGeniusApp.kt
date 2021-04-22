@@ -32,7 +32,6 @@ class JobGeniusApp: Application() {
         super.onCreate()
 
         CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
-            database.clearAllTables()
         }
     }
 }

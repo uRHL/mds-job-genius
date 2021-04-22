@@ -12,17 +12,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
 import com.canonicalexamples.jobgenius.databinding.FragmentLoginBinding
-import com.canonicalexamples.jobgenius.model.user.User
 import com.canonicalexamples.jobgenius.util.LoadImageURL
 import com.canonicalexamples.jobgenius.util.SecureStorage
-import com.canonicalexamples.jobgenius.viewmodels.LoginViewModel
-import com.canonicalexamples.jobgenius.viewmodels.LoginViewModelFactory
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -34,11 +29,6 @@ import kotlinx.coroutines.runBlocking
 
 
 class LoginFragment : Fragment() {
-
-    private val loginViewModel: LoginViewModel by viewModels {
-        val app = activity?.application as JobGeniusApp
-        LoginViewModelFactory(app.database)
-    }
 
     companion object{
         private const val RC_SIGN_IN = 120
@@ -53,6 +43,9 @@ class LoginFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
         bindingLoginFragment = FragmentLoginBinding.inflate(inflater, container, false)
 
         val view = bindingLoginFragment.root
@@ -117,29 +110,6 @@ class LoginFragment : Fragment() {
                         Log.d("Fragment Login", "signInWithCredential:success")
                         Toast.makeText(requireContext(), "User logged in", Toast.LENGTH_LONG).show()
                         updateUIUserDetails(auth.currentUser)
-//                        val user = auth.currentUser
-//                        if(user != null){
-//
-//                            upda
-//
-//
-//                            insertDataToDatabase(user.displayName, user.email, user.photoUrl.toString())
-//
-//                            loginViewModel.userList.observe(viewLifecycleOwner) { userList ->
-//
-//                                val u = userList[userList.size - 1]
-//
-//                                val name = secureStorage.decryptData(Base64.decode(u.nameIV, Base64.DEFAULT), Base64.decode(u.nameEncodedText, Base64.DEFAULT))
-//                                val mail = secureStorage.decryptData(Base64.decode(u.mailIV, Base64.DEFAULT), Base64.decode(u.mailEncodedText, Base64.DEFAULT))
-//                                val image = secureStorage.decryptData(Base64.decode(u.imageIV, Base64.DEFAULT), Base64.decode(u.imageEncodedText, Base64.DEFAULT))
-//
-//                                bindingLoginFragment.userDetails.userNameText.text = "Welcome $name!"
-//                                bindingLoginFragment.userDetails.userEmailText.text = mail
-//
-//                                val bitmap: Bitmap? = LoadImageURL().execute(image).get()
-//                                bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
-//                            }
-//                        }
                     } else {
                         Log.w("Fragment Login", "signInWithCredential:failure", task.exception)
                     }
@@ -161,31 +131,6 @@ class LoginFragment : Fragment() {
             bindingLoginFragment.userDetails.userAvatar.setImageDrawable(resources.getDrawable( R.drawable.ic_user, null))
             bindingLoginFragment.logOutBtn.visibility = View.GONE
         }
-    }
-
-    private fun insertDataToDatabase(name: String, mail: String, image: String) {
-        val namePair = secureStorage.encryptData(name)
-        val mailPair = secureStorage.encryptData(mail)
-        val imagePair = secureStorage.encryptData(image)
-
-        val nameIV = Base64.encodeToString(namePair.first, Base64.DEFAULT)
-        val nameEncodedText = Base64.encodeToString(namePair.second, Base64.DEFAULT)
-        val mailIV = Base64.encodeToString(mailPair.first, Base64.DEFAULT)
-        val mailEncodedText = Base64.encodeToString(mailPair.second, Base64.DEFAULT)
-        val imageIV = Base64.encodeToString(imagePair.first, Base64.DEFAULT)
-        val imageEncodedText = Base64.encodeToString(imagePair.second, Base64.DEFAULT)
-
-        val user = User(
-                0,
-                nameIV,
-                nameEncodedText,
-                mailIV,
-                mailEncodedText,
-                imageIV,
-                imageEncodedText
-        )
-        loginViewModel.addUser(user)
-        Toast.makeText(requireContext(), "User logged in", Toast.LENGTH_LONG).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
