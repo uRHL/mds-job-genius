@@ -1,8 +1,10 @@
 package com.canonicalexamples.jobgenius.view
 
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.databinding.JobCardItemBinding
@@ -30,13 +32,14 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
                         ret = if(!fav){
                             viewModel.saveFavJob(layoutPosition)
                         }else{
-                            viewModel.removeFavJob(layoutPosition)
+                            confirmFavJobDeletion(layoutPosition)
                         }
                     }
                     // Add/remove will return a positive Integer if the operation was successful
                     when (ret) {
                         1 -> switchFavouriteStatus()
-                        else -> { Toast.makeText(binding.root.context, "It was not possible to save the job", Toast.LENGTH_SHORT).show() }
+                        -1 -> { Toast.makeText(binding.root.context, "It was not possible to save the job", Toast.LENGTH_LONG).show() }
+                        else -> {}
                     }
 
                 }else {
@@ -56,6 +59,32 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
                 binding.jobFav.setImageResource(R.drawable.ic_empty_heart)
                 Toast.makeText(binding.root.context, "Job removed from favorites", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        private fun confirmFavJobDeletion(layoutPosition: Int): Int {
+            var ret = 0
+            val builder: AlertDialog.Builder = AlertDialog.Builder(binding.root.context)
+
+            // Set the custom messages
+            builder.setTitle("Confirm deletion")
+            builder.setMessage("This job will be removed from favorites")
+
+            // Set Cancelable false so if the user clicks outside the dialog it will be closed
+            builder.setCancelable(false)
+
+            // When the user click yes button the app will be closed
+            builder.setPositiveButton("Yes") { dialog , which ->
+                runBlocking { viewModel.removeFavJob(layoutPosition) }
+                ret = 1
+            }
+            // When the user clicks "no" button the dialog is canceled
+            builder.setNegativeButton("No" , DialogInterface.OnClickListener { dialog , which ->
+                dialog.cancel()
+            })
+
+            // Create the Alert dialog and show it
+            builder.create().show()
+            return ret
         }
     }
 

@@ -24,7 +24,6 @@ class JobListViewModel(private val database: JobDatabase, private val oauth: Fir
     private val secureStorage: SecureStorage = SecureStorage()
 
 
-
     fun onClickJobMore(n: Int) {
         // Navigate to the fragment job details
         println("Item $n clicked")
@@ -50,8 +49,8 @@ class JobListViewModel(private val database: JobDatabase, private val oauth: Fir
     suspend fun removeFavJob(n: Int ): Int {
         val uid = oauth.currentUser.uid
         return try {
-            // Remove from the database
-
+            // Remove the selected job from favorites table
+            database.favoriteJobDao().delete(fabJobList.value!![n].pk)
             1 // Transaction successful
         }catch (e: Exception){
             -1 // Transaction failed
