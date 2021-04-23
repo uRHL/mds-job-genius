@@ -15,6 +15,40 @@ class JobGeniusActivity : AppCompatActivity() {
 
     }
 
+//    // On backPressed is called when ever the back button is clicked
+//    override fun onBackPressed() {
+//        println(this.intent)
+//
+//
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+//
+//        // Set the message show for the Alert time
+//        builder.setMessage("Do you want to exit ?")
+//
+//        // Set Alert Title
+//        //builder.setTitle("Alert !")
+//
+//        // Set Cancelable false so if the user clicks outside the dialog it will be closed
+//        builder.setCancelable(false)
+//
+//        // When the user click yes button the app will be closed
+//        builder.setPositiveButton("Yes") { dialog , which ->
+//            run {
+//                finish()
+//                exitProcess(0)
+//            }
+//        }
+//
+//        // When the user clicks "no" button the dialog is canceled
+//        builder.setNegativeButton("No" , DialogInterface.OnClickListener { dialog , which -> dialog.cancel()})
+//
+//        // Create the Alert dialog
+//        val alertDialog: AlertDialog = builder.create()
+//
+//        // Show the Alert Dialog box
+//        alertDialog.show()
+//    }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)

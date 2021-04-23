@@ -1,12 +1,10 @@
 package com.canonicalexamples.jobgenius.viewmodels
 
 import android.util.Base64
-import android.widget.Toast
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.canonicalexamples.jobgenius.R
-import com.canonicalexamples.jobgenius.databinding.JobCardItemBinding
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJob
 import com.canonicalexamples.jobgenius.model.favoriteJob.FavoriteJobRepository
@@ -36,25 +34,39 @@ class JobListViewModel(private val database: JobDatabase, private val oauth: Fir
     /**
      * @return Positive integer when successful, negative Integer otherwise
      */
-    suspend fun onClickJobFav(n: Int, fav: Boolean, binding: JobCardItemBinding): Int {
-        val user = oauth.currentUser
+    suspend fun saveFavJob(n: Int): Int {
         return try {
-            // If the job is marked as favorite if it was not
-            if(!fav){
-                // Insert into the database
-                val uid: String =  user.uid
-                insertFavoriteJob(uid, jobList.value!![n])
-            }else{
-                // Remove from the database
-            }
+            // Insert into the database
+            insertFavoriteJob(oauth.currentUser.uid, jobList.value!![n])
             1 // Transaction successful
         }catch (e: Exception){
             -1 // Transaction failed
         }
     }
 
+    /**
+     * @return Positive integer when successful, negative Integer otherwise
+     */
+    suspend fun removeFavJob(n: Int ): Int {
+        val uid = oauth.currentUser.uid
+        return try {
+            // Remove from the database
+
+            1 // Transaction successful
+        }catch (e: Exception){
+            -1 // Transaction failed
+        }
+    }
+
+
     fun isUserLogged(): Boolean {
         return oauth.currentUser != null
+    }
+
+    fun getCurrentUserUid(): String {
+        return if(isUserLogged()) {
+            oauth.currentUser.uid
+        } else ""
     }
 
     private suspend fun insertFavoriteJob(uid: String, job: Job) {
@@ -85,6 +97,25 @@ class JobListViewModel(private val database: JobDatabase, private val oauth: Fir
                 job.company_logo
         )
         database.favoriteJobDao().addJob(jobFab)
+    }
+
+    private fun getLoggedUserFavorites(loggedUser: String?):  LiveData<List<FavoriteJob>> {
+        lateinit var loggedUserFabJobs: LiveData<List<FavoriteJob>>
+
+        if (loggedUser == null){
+            Log.d("JobLisViewModel","No user currently logged")
+        }else {
+            val iter = this.fabJobList.value!!.listIterator()
+            while (iter.hasNext()){
+                val elem = iter.next()
+                val uid = secureStorage.decryptData(Base64.decode(elem.ownerIV, Base64.DEFAULT), Base64.decode(elem.ownerEncodedText, Base64.DEFAULT))
+                if (uid == loggedUser){
+                    loggedUserFabJobs.value!!.plusElement(elem)
+                }
+            }
+        }
+
+        return loggedUserFabJobs
     }
 
 }

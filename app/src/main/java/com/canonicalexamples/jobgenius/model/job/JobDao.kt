@@ -19,4 +19,7 @@ interface JobDao {
 
     @Query("DELETE FROM job_table WHERE id = :id")
     suspend fun delete(id: Int)
+
+    @Query("DELETE FROM job_table")
+    suspend fun dropTable()
 }

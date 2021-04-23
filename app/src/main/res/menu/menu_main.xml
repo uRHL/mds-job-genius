@@ -2,16 +2,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.canonicalexamples.jobgenius.view.JobGeniusActivity">
+
     <item
-        android:id="@+id/action_login"
+        android:id="@+id/action_search"
         android:orderInCategory="100"
-        android:title="@string/action_login"
+        android:title="@string/action_favorites"
+        android:icon="@drawable/ic_magnifying_glass_job"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/action_favorites"
         android:orderInCategory="100"
         android:title="@string/action_favorites"
+        android:icon="@drawable/ic_filled_heart"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_login"
+        android:orderInCategory="100"
+        android:title="@string/action_login"
+        android:icon="@drawable/ic_user"
         app:showAsAction="ifRoom" />
 
 </menu>

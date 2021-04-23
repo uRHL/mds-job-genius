@@ -24,7 +24,7 @@
         android:id="@+id/JobListingActivity"
         android:name="com.canonicalexamples.jobgenius.view.JobListFragment"
         android:label="@string/job_list_fragment_label"
-        tools:layout="@layout/activity_job_listing">
+        tools:layout="@layout/fragment_job_listing">
 
         <action
             android:id="@+id/action_JobListingActivity_to_JobDetailsFragment"
@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_JobListingActivity_to_JobFavListingFragment"
             app:destination="@id/JobFavListingFragment" />
+        <action
+            android:id="@+id/action_JobListingActivity_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
 
     </fragment>
 
@@ -50,6 +53,9 @@
         <action
             android:id="@+id/action_JobFavListingFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_JobFavListingFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
     </fragment>
 
     <fragment
@@ -67,6 +73,9 @@
         <action
             android:id="@+id/action_JobDetailsFragment_to_JobFavListingFragment"
             app:destination="@id/JobFavListingFragment" />
+        <action
+            android:id="@+id/action_JobDetailsFragment_to_SearchFragment"
+            app:destination="@id/SearchFragment" />
     </fragment>
 
     <fragment

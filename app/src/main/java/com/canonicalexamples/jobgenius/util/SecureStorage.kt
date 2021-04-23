@@ -2,7 +2,6 @@ package com.canonicalexamples.jobgenius.util
 
 import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyProperties
-import java.lang.NullPointerException
 import java.security.KeyStore
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -54,6 +55,7 @@ class SearchFragment : Fragment() {
             findNavController().navigate(R.id.action_SearchFragment_to_JobListFragment)
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -65,8 +67,14 @@ class SearchFragment : Fragment() {
             }
 
             R.id.action_favorites -> {
-                findNavController().navigate(R.id.action_SearchFragment_to_JobFavListingFragment)
-                true
+                val app = activity?.application as JobGeniusApp
+                if(app.auth.currentUser != null) {
+                    findNavController().navigate(R.id.action_SearchFragment_to_JobFavListingFragment)
+                    true
+                }else {
+                    Toast.makeText(app.applicationContext, "You need to be logged in to see your saved jobs", Toast.LENGTH_LONG).show()
+                    false
+                }
             }
             else -> super.onOptionsItemSelected(item)
         }

@@ -1,11 +1,8 @@
 package com.canonicalexamples.jobgenius.app
 
 import android.app.Application
-import android.content.Context
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope

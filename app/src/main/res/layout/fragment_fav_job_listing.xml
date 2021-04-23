@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.JobListFragment"
-    android:id="@+id/job_list_activity">
+    android:id="@+id/job_listing_fragment">
 
     <include
         layout="@layout/fragment_job_list"

@@ -43,6 +43,7 @@
     <string name="bottom_nav_favorites">Favorites</string>
     <string name="bottom_nav_applications">My applications</string>
     <string name="action_favorites">favorites</string>
+    <string name="action_search">search</string>
     <string name="job_fav_list_fragment_label">Job fav List fragment</string>
 
 </resources>

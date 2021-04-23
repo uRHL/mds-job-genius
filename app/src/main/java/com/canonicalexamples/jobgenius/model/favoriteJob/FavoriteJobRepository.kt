@@ -13,4 +13,5 @@ class FavoriteJobRepository(private val fabJobDao: FavoriteJobDao) {
     suspend fun removeFabJob(id: Int){
         fabJobDao.delete(id)
     }
+
 }

@@ -25,14 +25,20 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
             binding.jobFav.setOnClickListener {
 
                 if(viewModel.isUserLogged()){
-
+                    var ret = 0
                     runBlocking {
-                        // OnClick will return a positive Integer if the operation was successfull
-                        when (viewModel.onClickJobFav(layoutPosition, fav, binding)) {
-                            1 -> switchFavouriteStatus()
-                            else -> { Toast.makeText(binding.root.context, "It was not possible to save the job", Toast.LENGTH_LONG).show() }
+                        ret = if(!fav){
+                            viewModel.saveFavJob(layoutPosition)
+                        }else{
+                            viewModel.removeFavJob(layoutPosition)
                         }
                     }
+                    // Add/remove will return a positive Integer if the operation was successful
+                    when (ret) {
+                        1 -> switchFavouriteStatus()
+                        else -> { Toast.makeText(binding.root.context, "It was not possible to save the job", Toast.LENGTH_SHORT).show() }
+                    }
+
                 }else {
                     Toast.makeText(binding.root.context, "You have to be logged in", Toast.LENGTH_LONG).show()
                 }
@@ -44,11 +50,11 @@ class JobListAdapter(private val viewModel: JobListViewModel): RecyclerView.Adap
             if(fav){
                 // Job successfully saved as favorite
                 binding.jobFav.setImageResource(R.drawable.ic_filled_heart)
-                Toast.makeText(binding.root.context, "Job added to favorites", Toast.LENGTH_LONG).show()
+                Toast.makeText(binding.root.context, "Job added to favorites", Toast.LENGTH_SHORT).show()
             }else{
                 // Job successfully removed from favorites
                 binding.jobFav.setImageResource(R.drawable.ic_empty_heart)
-                Toast.makeText(binding.root.context, "Job removed from favorites", Toast.LENGTH_LONG).show()
+                Toast.makeText(binding.root.context, "Job removed from favorites", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,10 +1,8 @@
 package com.canonicalexamples.jobgenius.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -124,12 +122,14 @@ class LoginFragment : Fragment() {
             val bitmap: Bitmap? = LoadImageURL().execute(currentUser.photoUrl.toString()).get()
             bindingLoginFragment.userDetails.userAvatar.setImageBitmap(bitmap)
             bindingLoginFragment.logOutBtn.visibility = View.VISIBLE
+            bindingLoginFragment.signInBtn.visibility = View.GONE
         }else{
             // If there is no user logged in, log out button is not displayed, and UI is set to default
             bindingLoginFragment.userDetails.userNameText.text = resources.getString(R.string.userWelcomeText)
             bindingLoginFragment.userDetails.userEmailText.text = resources.getString(R.string.userEmailText)
             bindingLoginFragment.userDetails.userAvatar.setImageDrawable(resources.getDrawable( R.drawable.ic_user, null))
             bindingLoginFragment.logOutBtn.visibility = View.GONE
+            bindingLoginFragment.signInBtn.visibility = View.VISIBLE
         }
     }
 
@@ -140,9 +140,21 @@ class LoginFragment : Fragment() {
         return when (item.itemId) {
 
             R.id.action_favorites -> {
-                findNavController().navigate(R.id.action_LoginFragment_to_JobFavListingFragment)
+                val app = activity?.application as JobGeniusApp
+                if(app.auth.currentUser != null) {
+                    findNavController().navigate(R.id.action_LoginFragment_to_JobFavListingFragment)
+                    true
+                }else {
+                    Toast.makeText(app.applicationContext, "You need to be logged in to see your saved jobs", Toast.LENGTH_LONG).show()
+                    false
+                }
+            }
+
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_LoginFragment_to_SearchFragment)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

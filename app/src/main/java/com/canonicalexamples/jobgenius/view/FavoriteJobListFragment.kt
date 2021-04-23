@@ -11,13 +11,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
-import com.canonicalexamples.jobgenius.databinding.ActivityJobListingBinding
+import com.canonicalexamples.jobgenius.databinding.FragmentJobListingBinding
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModelFactory
 
 class FavoriteJobListFragment : Fragment() {
 
-    private lateinit var binding: ActivityJobListingBinding
+    private lateinit var binding: FragmentJobListingBinding
     private val viewModel: JobListViewModel by viewModels {
         val app = activity?.application as JobGeniusApp
         JobListViewModelFactory(app.database, app.auth)
@@ -30,7 +30,7 @@ class FavoriteJobListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
-        binding = ActivityJobListingBinding.inflate(inflater, container, false)
+        binding = FragmentJobListingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,7 +43,8 @@ class FavoriteJobListFragment : Fragment() {
         binding.jobList.recyclerView.adapter = adapter
         binding.jobList.recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.fabJobList.observe(viewLifecycleOwner, { fabJob -> adapter.setData(fabJob) })
+
+        viewModel.fabJobList.observe(viewLifecycleOwner, { fabJob -> adapter.setData(viewModel.getCurrentUserUid(), fabJob) })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -55,7 +56,16 @@ class FavoriteJobListFragment : Fragment() {
                 findNavController().navigate(R.id.action_JobFavListingFragment_to_LoginFragment)
                 true
             }
+
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_JobFavListingFragment_to_SearchFragment)
+                true
+            }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 }
+
+

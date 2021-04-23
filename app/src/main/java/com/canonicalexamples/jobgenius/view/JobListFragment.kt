@@ -5,19 +5,20 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.canonicalexamples.jobgenius.R
 import com.canonicalexamples.jobgenius.app.JobGeniusApp
-import com.canonicalexamples.jobgenius.databinding.ActivityJobListingBinding
+import com.canonicalexamples.jobgenius.databinding.FragmentJobListingBinding
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModel
 import com.canonicalexamples.jobgenius.viewmodels.JobListViewModelFactory
 
 class JobListFragment : Fragment() {
 
-    private lateinit var binding: ActivityJobListingBinding
+    private lateinit var binding: FragmentJobListingBinding
     private val viewModel: JobListViewModel by viewModels {
         val app = activity?.application as JobGeniusApp
         JobListViewModelFactory(app.database, app.auth)
@@ -30,7 +31,7 @@ class JobListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
-        binding = ActivityJobListingBinding.inflate(inflater, container, false)
+        binding = FragmentJobListingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -57,9 +58,21 @@ class JobListFragment : Fragment() {
             }
 
             R.id.action_favorites -> {
-                findNavController().navigate(R.id.action_JobListingActivity_to_JobFavListingFragment)
+                val app = activity?.application as JobGeniusApp
+                if(app.auth.currentUser != null) {
+                    findNavController().navigate(R.id.action_JobListingActivity_to_JobFavListingFragment)
+                    true
+                }else {
+                    Toast.makeText(app.applicationContext, "You need to be logged in to see your saved jobs", Toast.LENGTH_LONG).show()
+                    false
+                }
+            }
+
+            R.id.action_search -> {
+                findNavController().navigate(R.id.action_JobListingActivity_to_SearchFragment)
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }

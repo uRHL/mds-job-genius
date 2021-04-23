@@ -1,15 +1,9 @@
 package com.canonicalexamples.jobgenius.util
 
-import android.R
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
-import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import androidx.appcompat.app.AppCompatActivity
 import java.net.URL
 
 

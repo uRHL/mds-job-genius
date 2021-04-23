@@ -1,10 +1,11 @@
 package com.canonicalexamples.jobgenius.viewmodels
 
 import android.os.StrictMode
-import androidx.lifecycle.*
-import com.canonicalexamples.jobgenius.model.job.Job
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.canonicalexamples.jobgenius.model.JobDatabase
 import com.canonicalexamples.jobgenius.model.JobService
+import com.canonicalexamples.jobgenius.model.job.Job
 import retrofit2.Call
 
 
@@ -21,6 +22,10 @@ class SearchViewModel(private val database: JobDatabase, private val webservice:
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         val jobs: List<Job>? = jobsCall.execute().body()
+
+        // Empty the table
+        database.jobDao().dropTable()
+
         val listIterator = jobs?.listIterator()
         if (listIterator != null) {
             while (listIterator.hasNext()){
