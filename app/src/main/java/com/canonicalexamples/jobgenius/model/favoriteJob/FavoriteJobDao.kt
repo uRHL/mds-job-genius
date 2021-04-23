@@ -17,6 +17,6 @@ interface FavoriteJobDao {
     @Update
     suspend fun update(fabJob: FavoriteJob)
 
-    @Query("DELETE FROM fab_job_table WHERE id = :id")
+    @Query("DELETE FROM fab_job_table WHERE pk = :id")
     suspend fun delete(id: Int)
 }

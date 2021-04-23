@@ -28,7 +28,7 @@ class FavoriteJobListAdapter(private val viewModel: JobListViewModel): RecyclerV
             binding.jobFav.setImageResource(R.drawable.ic_filled_heart)
 
             // Set the listener on the "more" button
-            binding.jobMore.setOnClickListener { viewModel.onClickJobMore(layoutPosition) }
+            //binding.jobMore.setOnClickListener { viewModel.onClickJobMore(layoutPosition) }
 
             // Set the listener on the "favorite" button
             binding.jobFav.setOnClickListener {
